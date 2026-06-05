@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vaultiq/app_routes/app_routes.dart';
 
 
-
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
  
@@ -13,17 +12,17 @@ void main()async {
     url: "https://eqgilxxzbjfawidwncrn.supabase.co",
     anonKey: "sb_publishable_AuCr2nguwsuGVTg51fNnwA_H6J_4cTk",
   );
-
-  
-  runApp(const MyApp());
+runApp(const MyApp());
   
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget 
+{
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
        return ScreenUtilInit(
       designSize: Size(360, 690), 
       minTextAdapt: true,

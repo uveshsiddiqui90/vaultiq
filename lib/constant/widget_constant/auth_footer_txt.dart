@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
+import 'package:vaultiq/constant/app_style/app_style.dart';
+import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 
 class AuthFooterText extends StatelessWidget {
@@ -19,19 +22,20 @@ class AuthFooterText extends StatelessWidget {
     return Text.rich(
       TextSpan(
         text: normalText,
-        style: const TextStyle(
-          fontSize: 14,
-          color: Colors.grey,
-          fontWeight: FontWeight.w400,
+        style: AppStyles.dmSans(
+          size: AppTextSize.medium,
+          weight: AppFontWeight.regular,
+          color: ColorConstant.inkMuted,
         ),
         children: [
           TextSpan(
             text: actionText,
-            style: const TextStyle(
-              fontSize: 14,
+            style: AppStyles.dmSans(
+              size: AppTextSize.medium,
+              weight: AppFontWeight.bold,
               color: ColorConstant.txtColor2nd,
-              fontWeight: FontWeight.w600,
             ),
+
             recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],

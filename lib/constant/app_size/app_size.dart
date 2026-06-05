@@ -27,4 +27,13 @@ class AppSize {
   static const SizedBox w16 = SizedBox(width: 16);
   static const SizedBox w20 = SizedBox(width: 20);
   static const SizedBox w24 = SizedBox(width: 24);
+
+
+  static double height(BuildContext context, double percentage) {
+    return MediaQuery.of(context).size.height * percentage;
+  }
+
+  static double width(BuildContext context, double percentage) {
+    return MediaQuery.of(context).size.width * percentage;
+  }
 }

@@ -12,6 +12,8 @@ class SignupController extends GetxController {
   Rx<bool> isPasswordVisible = false.obs;
   Rx<bool> isConfirmPasswordVisible = false.obs;
 
+  final formKey = GlobalKey<FormState>();
+
   Future<void> userSignUp({
     required String name,
     required String email,

@@ -28,14 +28,12 @@ class DashboardPage extends StatelessWidget {
     return Obx(
       () => Scaffold(
         backgroundColor: ColorConstant.primaryColor,
+        extendBody: true,
         body: IndexedStack(
           index: controller.currentIndex.value,
           children: screens,
         ),
-        bottomNavigationBar: DashboardBottomNav(
-          currentIndex: controller.currentIndex.value,
-          onTap: controller.changeTab,
-        ),
+        bottomNavigationBar: DashboardBottomNav(),
       ),
     );
   }

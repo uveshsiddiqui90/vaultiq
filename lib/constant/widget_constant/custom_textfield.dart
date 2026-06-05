@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
+import 'package:vaultiq/constant/app_style/app_style.dart';
+import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
+
   final bool isPassword;
   final bool isPasswordVisible;
   final VoidCallback? onTogglePassword;
+
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+
+  final Widget? prefixIcon;
 
   const CustomTextField({
     super.key,
@@ -21,72 +29,128 @@ class CustomTextField extends StatelessWidget {
     this.onTogglePassword,
     this.keyboardType = TextInputType.text,
     this.validator,
+    this.prefixIcon,
   });
 
-  // ─── build ───────────────────────────────────────────
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  final FocusNode _focusNode = FocusNode();
+
+  bool isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _focusNode.addListener(() {
+      setState(() {
+        isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: ColorConstant.txtColor,
+          widget.label.toUpperCase(),
+            style: AppStyles.dmSans(
+            size: AppTextSize.small,
+            weight: AppFontWeight.semiBold,
+            color: ColorConstant.inkMuted,
           ),
         ),
-        const SizedBox(height: 6),
-        TextFormField(
-          controller: controller,
-          obscureText: isPassword && !isPasswordVisible,
-          keyboardType: keyboardType,
-          validator: validator,
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(
-              color: Colors.grey.shade400,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+
+        SizedBox(height: 8.h),
+
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+
+          decoration: BoxDecoration(
+            color: isFocused
+                ? ColorConstant.focusedFieldBg
+                : ColorConstant.border,
+
+            borderRadius: BorderRadius.circular(16.r),
+
+            border: Border.all(
+              color: isFocused ? ColorConstant.primary : Colors.transparent,
+
+              width: 1.5,
             ),
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
+          ),
+
+          child: TextFormField(
+            focusNode: _focusNode,
+
+            controller: widget.controller,
+
+            validator: widget.validator,
+
+            keyboardType: widget.keyboardType,
+
+            obscureText: widget.isPassword && !widget.isPasswordVisible,
+
+            style: AppStyles.dmSans(
+              size: AppTextSize.small,
+              weight: AppFontWeight.semiBold,
+              color: ColorConstant.inkMuted,
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFF4F46E5), // Spendly brand color
-                width: 1.5,
+
+            decoration: InputDecoration(
+              hintText: widget.hint,
+
+              hintStyle: AppStyles.dmSans(
+                size: AppTextSize.body,
+                weight: AppFontWeight.medium,
+                color: ColorConstant.inkMuted,
+              ),
+
+              prefixIcon: widget.prefixIcon,
+
+              suffixIcon: widget.isPassword
+                  ? IconButton(
+                      onPressed: widget.onTogglePassword,
+                      icon: Icon(
+                        widget.isPasswordVisible
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        size: 20.sp,
+                        color: ColorConstant.inkMuted,
+                      ),
+                    )
+                  : null,
+
+              border: InputBorder.none,
+
+              enabledBorder: InputBorder.none,
+
+              focusedBorder: InputBorder.none,
+
+              errorBorder: InputBorder.none,
+
+              focusedErrorBorder: InputBorder.none,
+
+              filled: true,
+
+              fillColor: Colors.transparent,
+
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 18.h,
               ),
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.redAccent),
-            ),
-            suffixIcon: isPassword
-                ? IconButton(
-                    icon: Icon(
-                      isPasswordVisible
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: Colors.grey.shade500,
-                      size: 20,
-                    ),
-                    onPressed: onTogglePassword,
-                  )
-                : null,
           ),
         ),
       ],

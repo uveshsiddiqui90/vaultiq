@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vaultiq/app_routes/app_routes.dart';
+import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 import 'package:vaultiq/constant/app_padding/app_padding.dart';
 import 'package:vaultiq/constant/app_size/app_size.dart';
+import 'package:vaultiq/constant/app_style/app_style.dart' show AppStyles;
 import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/icon_constant.dart';
@@ -21,29 +23,33 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Padding(
         padding: AppPadding.screen,
         child: SingleChildScrollView(
           child: Form(
             key: loginController.formKey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
-                AppSize.h100,
+                AppSize.h60,
+                WidgetConstant.iconDisplay(IconConstant.wavingHand),
+                AppSize.h20,
                 Text(
                   TextConstant.welcomeBack,
-                  style: TextStyle(
-                    fontSize: AppTextSize.extraLarge,
-                    fontWeight: FontWeight.w600,
-                    color: ColorConstant.txtColor,
+                  style: AppStyles.syne(
+                    size: AppTextSize.extraLarge,
+                    weight: AppFontWeight.bold,
+                    color: ColorConstant.inkDark,
                   ),
                 ),
                 Text(
-                  TextConstant.logintocontinue,
-                  style: TextStyle(
-                    fontSize: AppTextSize.medium,
-                    fontWeight: FontWeight.w400,
-                    color: ColorConstant.txtColor,
+                  TextConstant.logintomanageyourexpenses,
+                  style: AppStyles.dmSans(
+                    size: AppTextSize.medium,
+                    weight: AppFontWeight.regular,
+                    color: ColorConstant.inkMuted,
                   ),
                 ),
                 AppSize.h40,
@@ -83,9 +89,10 @@ class LoginPage extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Text(
                     TextConstant.forgotPassword,
-                    style: TextStyle(
-                      color: ColorConstant.txtColor2nd,
-                      fontWeight: FontWeight.w600,
+                    style: AppStyles.dmSans(
+                      size: AppTextSize.body,
+                      weight: AppFontWeight.medium,
+                      color: ColorConstant.blue,
                     ),
                   ),
                 ),
@@ -109,13 +116,16 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {},
                 ),
                 AppSize.h20,
-                AuthFooterText(
-                  normalText: TextConstant.dontHaveAccount,
-                  actionText: TextConstant.signUp,
-                  onTap: () {
-                    Get.toNamed(AppRoutes.SIGNUP);
-                  },
+                Center(
+                  child: AuthFooterText(
+                    normalText: TextConstant.dontHaveAccount,
+                    actionText: TextConstant.signUp,
+                    onTap: () {
+                      Get.offNamed(AppRoutes.SIGNUP);
+                    },
+                  ),
                 ),
+                AppSize.h32,
               ],
             ),
           ),
