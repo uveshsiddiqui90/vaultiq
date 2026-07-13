@@ -31,6 +31,29 @@ class TextConstant {
 
   //Budget Screen
   static const String budgetTitle = 'Budget';
+  static const String monthlyBudget = 'Monthly Budget';
+  static const String budgetUsage = 'Budget Usage';
+  static const String remainingBudget = 'Remaining Budget';
+  static const String editBudget = 'Edit Budget';
+
+  //Expense Screen
+  static const String addExpenseTitle = 'Add Expense';
+  static const String amountLabel = 'Amount';
+  static const String categoryLabel = 'CATEGORY';
+  static const String dateLabel = 'DATE';
+  static const String noteLabel = 'Note(Optional)';
+  static const String addExpenseButton = 'Add Expense';
+  static const String selectCategoryHint = 'Select category';
+  static const String enterAmountHint = 'Enter amount';
+  static const String enterDateHint = 'Select date';
+  static const String enterNoteHint = 'Add a note about this expense';
+
+  //Profile Screen
+  static const String profileTitle = 'Profile Page';
+  static const String editProfile = 'Edit Profile';
+  static const String darkMode = 'Dark Mode';
+  static const String currency = 'Currency';
+  static const String logout = 'Logout';
 
   //error messages
   static const String error = 'Error';
@@ -39,8 +62,7 @@ class TextConstant {
   static const String emailEmptyError = 'Please enter your email';
   static const String passwordEmptyError = 'Please enter your password';
   static const String emailPasswordRequired = "Email & Password required";
-  static const String confirmPasswordEmptyError =
-      'Please confirm your password';
+  static const String confirmPasswordEmptyError ='Please confirm your password';
   static const String userNotFoundError = 'User not found';
   static const String somethingWentWrong = 'Something went wrong';
   static const String loginFailed = 'Login Failed';

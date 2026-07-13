@@ -17,8 +17,8 @@ class DashboardPage extends StatelessWidget {
 
   final List<Widget> screens = [
     HomePage(),
-    AddexpensePage(),
     BudgetPage(),
+    AddexpensePage(),
     const Center(child: Text("Analytics Screen")),
     ProfilePage()
   ];

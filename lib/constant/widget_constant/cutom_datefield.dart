@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
+import 'package:vaultiq/constant/app_style/app_style.dart';
+import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
+import 'package:vaultiq/constant/color_constant.dart';
 
 class CustomDateField extends StatelessWidget {
   final String label;
@@ -19,7 +24,32 @@ class CustomDateField extends StatelessWidget {
       initialDate: selectedDate,
       firstDate: DateTime(2020),
       lastDate: DateTime(2035),
-    );
+      builder: (context, child) {
+      return Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.dark(
+            primary: ColorConstant.primary,          // Selected date & header
+            onPrimary: Colors.white,                 // Header text
+            surface: const Color(0xFF1B203A),        // Calendar background
+            onSurface: Colors.white,                 // Calendar numbers
+          ),
+
+          dialogTheme: DialogThemeData(
+            backgroundColor: const Color(0xFF1B203A),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: ColorConstant.primary, // Cancel & OK
+            ),
+          ),
+        ),
+        child: child!,
+      );
+  });
 
     if (pickedDate != null) {
       onDateSelected(pickedDate);
@@ -35,10 +65,10 @@ class CustomDateField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF1A1A2E),
+          style: AppStyles.dmSans(
+            size: AppTextSize.small,
+            weight: AppFontWeight.semiBold,
+            color: ColorConstant.inkMuted,
           ),
         ),
         const SizedBox(height: 6),
@@ -48,37 +78,34 @@ class CustomDateField extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: formattedDate,
-                hintStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF1A1A2E),
+                hintStyle: AppStyles.dmSans(
+                  size: AppTextSize.small,
+                  weight: AppFontWeight.medium,
+                  color: ColorConstant.inkMuted,
                 ),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: ColorConstant.border,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 14,
+                  vertical: 20,
                 ),
-                suffixIcon: const Icon(
-                  Icons.calendar_today_outlined,
-                  size: 20,
-                ),
+                suffixIcon: const Icon(Icons.calendar_today_outlined, size: 20),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
                     color: Color(0xFFD9D9D9),
                     width: 1.2,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
                     color: Color(0xFFD9D9D9),
                     width: 1.2,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
                     color: Color(0xFFD9D9D9),
                     width: 1.2,

@@ -65,7 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Text(
           widget.label.toUpperCase(),
-            style: AppStyles.dmSans(
+          style: AppStyles.dmSans(
             size: AppTextSize.small,
             weight: AppFontWeight.semiBold,
             color: ColorConstant.inkMuted,
@@ -154,6 +154,41 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class CustomInputContainer extends StatelessWidget {
+  final Widget child;
+  final bool isFocused;
+
+  const CustomInputContainer({
+    super.key,
+    required this.child,
+    this.isFocused = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+
+      decoration: BoxDecoration(
+        color: isFocused
+            ? ColorConstant.focusedFieldBg
+            : ColorConstant.border,
+
+        borderRadius: BorderRadius.circular(16.r),
+
+        border: Border.all(
+          color: isFocused
+              ? ColorConstant.primary
+              : Colors.transparent,
+          width: 1.5,
+        ),
+      ),
+
+      child: child,
     );
   }
 }

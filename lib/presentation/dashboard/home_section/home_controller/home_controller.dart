@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
 import 'package:vaultiq/data/services/budget_service/budget_service.dart';
 import 'package:vaultiq/data/services/expense_service/expense_service.dart';
@@ -8,18 +10,19 @@ class HomeController extends GetxController {
   final BudgetService _budgetService = BudgetService();
   RxDouble monthlyBudget = 0.0.obs;
   RxList<ExpenseModel> expenses = <ExpenseModel>[].obs;
+  
   RxBool isLoading = false.obs;
   final ExpenseService _expenseService = ExpenseService();
 
   RxDouble totalExpense = 0.0.obs;
 
   RxDouble remainingBudget = 0.0.obs;
+  final currencyFormatter = NumberFormat('#,##0');
+  RxString userName = "User".obs;
 
   @override
   void onInit() async {
-    await fetchBudget();
-    await fetchExpenses();
-    await fetchTotalExpense();
+    loadHomeData();
     super.onInit();
   }
 
@@ -32,19 +35,16 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> fetchExpenses() async {
-    try {
-      isLoading.value = true;
+ Future<void> fetchExpenses() async {
+  try {
+    final fetchedExpenses =
+        await _expenseService.fetchExpenses();
 
-      final fetchedExpenses = await _expenseService.fetchExpenses();
-
-      expenses.assignAll(fetchedExpenses);
-    } catch (e) {
-      AppSnackbar.error(message: e.toString());
-    } finally {
-      isLoading.value = false;
-    }
+    expenses.assignAll(fetchedExpenses);
+  } catch (e) {
+    AppSnackbar.error(message: e.toString());
   }
+}
 
   Future<void> fetchTotalExpense() async {
     try {
@@ -66,7 +66,44 @@ class HomeController extends GetxController {
 
   void calculateRemainingBudget() {
     remainingBudget.value = monthlyBudget.value - totalExpense.value;
-
-    print("Remaining Budget: ${remainingBudget.value}");
   }
+
+    Future<void> getUserName() async {
+
+    final user = Supabase.instance.client.auth.currentUser;
+    userName.value = user?.userMetadata?['name'] ?? 'User';
+  }
+
+
+  double get budgetProgress {
+  if (monthlyBudget.value <= 0) return 0.0;
+
+  return (totalExpense.value / monthlyBudget.value).clamp(0.0, 1.0);
+}
+
+double get percentageUsed {
+  if (monthlyBudget.value <= 0) return 0;
+
+  return (totalExpense.value / monthlyBudget.value) * 100;
+}
+
+
+Future<void> loadHomeData() async {
+  try {
+    isLoading.value = true;
+
+    await Future.wait([
+      getUserName(),
+      fetchBudget(),
+      fetchExpenses(),
+      fetchTotalExpense(),
+    ]);
+  } catch (e) {
+    print(e);
+  } finally {
+    isLoading.value = false;
+  }
+}
+
+
 }

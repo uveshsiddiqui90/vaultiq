@@ -13,7 +13,6 @@ void main()async {
     anonKey: "sb_publishable_AuCr2nguwsuGVTg51fNnwA_H6J_4cTk",
   );
 runApp(const MyApp());
-  
 }
 
 class MyApp extends StatelessWidget 
@@ -55,4 +54,5 @@ static String getInitialRoute() {
     return AppRoutes.LOGIN;
   }
 }
+
 }

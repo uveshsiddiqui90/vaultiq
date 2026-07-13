@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vaultiq/app_utils/currency_formatter/currency_formatter.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 import 'package:vaultiq/constant/app_padding/app_padding.dart';
 import 'package:vaultiq/constant/app_size/app_size.dart';
+import 'package:vaultiq/constant/app_style/app_style.dart';
 import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
 import 'package:vaultiq/constant/widget_constant/app_bottom_nav/bottom_nav.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
 import 'package:vaultiq/presentation/dashboard/budget_section/budget_controller/budget_controller.dart';
+import 'package:vaultiq/presentation/dashboard/budget_section/shimmer/budget_shimmer.dart';
 import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller.dart';
 
 class BudgetPage extends StatelessWidget {
@@ -22,47 +26,50 @@ class BudgetPage extends StatelessWidget {
       backgroundColor: ColorConstant.primaryColor,
       body: Padding(
         padding: AppPadding.screen,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppSize.h40,
-            Center(
-              child: Row(
-                children: [
-                  Text(
-                    TextConstant.budgetTitle,
-                    style: TextStyle(
-                      fontSize: AppTextSize.largeTitle,
-                      fontWeight: AppFontWeight.bold,
-                    ),
+        child: Obx(
+          () {
+             if (budgetController.isLoading.value) {
+                return const BudgetShimmer();
+              }
+          
+           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              AppSize.h40,
+              Center(
+                child: Text(
+                  TextConstant.budgetTitle,
+                  style: AppStyles.dmSans(
+                    size: AppTextSize.extraLarge,
+                    weight: AppFontWeight.bold,
+                    color: ColorConstant.darkBg,
                   ),
-                ],
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-            AppSize.h20,
-            monthlyBudgetWidget(),
-            AppSize.h20,
-            budgetUsageWidget(),
-            AppSize.h20,
-            remainingBudgetWidget(),
-            AppSize.h40,
-            CustomButton(
-              label: "Edit Budget",
-              onPressed: () {
-                AppBottomSheet.showAmountBottomSheet(
-                  context: context,
-                  controller: budgetController.budgettxt,
-                  onSave: () async {
-                    await budgetController.updateBudget();
-                    await budgetController.fetchBudget();
-                    await homeController.fetchBudget();
-                    
-                  },
-                );
-              },
-            ),
-          ],
-        ),
+              AppSize.h20,
+              monthlyBudgetWidget(),
+              AppSize.h20,
+              budgetUsageWidget(),
+              AppSize.h20,
+              remainingBudgetWidget(),
+              AppSize.h40,
+              CustomButton(
+                label: TextConstant.editBudget,
+                onPressed: () {
+                  AppBottomSheet.showAmountBottomSheet(
+                    context: context,
+                    controller: budgetController.budgettxt,
+                    onSave: () async {
+                      budgetController.saveBudget();
+                    },
+                  );
+                },
+              ),
+            ],
+          );
+  }),
       ),
     );
   }
@@ -87,20 +94,21 @@ class BudgetPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Monthly Budget',
-            style: TextStyle(
-              fontSize: AppTextSize.title,
-              fontWeight: AppFontWeight.medium,
+            TextConstant.monthlyBudget,
+            style: AppStyles.syne(
+              size: AppTextSize.medium,
+              weight: AppFontWeight.bold,
+              color: ColorConstant.darkBg,
             ),
           ),
           SizedBox(height: 8),
           Obx(
             () => Text(
-              budgetController.monthlyBudget.value.toString(),
-              style: TextStyle(
-                fontSize: AppTextSize.title,
-                fontWeight: AppFontWeight.bold,
-                color: Colors.green,
+              "₹ ${CurrencyFormatter.format(budgetController.monthlyBudget.value)}",
+              style: AppStyles.syne(
+                size: AppTextSize.largeTitle,
+                weight: AppFontWeight.bold,
+                color: ColorConstant.primaryDark,
               ),
             ),
           ),
@@ -128,25 +136,35 @@ class BudgetPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Budget Usage',
-            style: TextStyle(
-              fontSize: AppTextSize.title,
-              fontWeight: AppFontWeight.medium,
+            TextConstant.budgetUsage,
+            style: AppStyles.syne(
+              size: AppTextSize.medium,
+              weight: AppFontWeight.bold,
+              color: ColorConstant.inkDark,
             ),
           ),
           SizedBox(height: 8),
-          LinearProgressIndicator(
-            value: 0.75, // Example usage percentage
-            backgroundColor: Colors.grey.shade300,
-            color: Colors.green,
+
+          Obx(
+            () => ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: LinearProgressIndicator(
+                value: budgetController.budgetProgress,
+                minHeight: 8.h,
+                backgroundColor: ColorConstant.pageBg,
+                valueColor: AlwaysStoppedAnimation(ColorConstant.primary),
+              ),
+            ),
           ),
           SizedBox(height: 8),
-          Text(
-            '75% used',
-            style: TextStyle(
-              fontSize: AppTextSize.body,
-              fontWeight: AppFontWeight.regular,
-              color: Colors.grey,
+          Obx(
+            () => Text(
+              '${budgetController.percentageUsed.toStringAsFixed(0)}% used',
+              style: TextStyle(
+                fontSize: AppTextSize.body,
+                fontWeight: AppFontWeight.regular,
+                color: Colors.grey,
+              ),
             ),
           ),
         ],
@@ -173,19 +191,21 @@ class BudgetPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Remaining Budget',
+            TextConstant.remainingBudget,
             style: TextStyle(
               fontSize: AppTextSize.title,
               fontWeight: AppFontWeight.medium,
             ),
           ),
           SizedBox(height: 8),
-          Text(
-            '\$500',
-            style: TextStyle(
-              fontSize: AppTextSize.title,
-              fontWeight: AppFontWeight.bold,
-              color: Colors.red,
+          Obx(
+            () => Text(
+              "₹ ${CurrencyFormatter.format(budgetController.remainingBudget.value)}",
+              style: TextStyle(
+                fontSize: AppTextSize.title,
+                fontWeight: AppFontWeight.bold,
+                color: Colors.red,
+              ),
             ),
           ),
         ],
