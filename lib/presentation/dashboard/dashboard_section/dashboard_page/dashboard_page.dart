@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_page/addexpense_page.dart';
+import 'package:vaultiq/presentation/dashboard/analytics_section/analytics_page/analytics_page.dart';
 import 'package:vaultiq/presentation/dashboard/budget_section/budget_page/budget_page.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_bottom_nav/dashboard_bottom_nav.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
@@ -19,7 +20,7 @@ class DashboardPage extends StatelessWidget {
     HomePage(),
     BudgetPage(),
     AddexpensePage(),
-    const Center(child: Text("Analytics Screen")),
+    AnalyticsPage(),
     ProfilePage()
   ];
 

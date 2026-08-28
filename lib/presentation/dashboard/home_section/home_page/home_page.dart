@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vaultiq/app_routes/app_routes.dart';
 import 'package:vaultiq/app_utils/greeting_helper/greeting_helper.dart';
 import 'package:vaultiq/constant/app_asset_size/appassetsize.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
@@ -23,60 +24,67 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConstant.primaryColor,
       body: Obx(() {
-         if (homeController.isLoading.value) {
-            return const HomeShimmer();
-          }
-         return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Obx(
-                  () => topContainer(
-                    context,
-                    monthlyBudget: homeController.monthlyBudget.value,
-                    totalExpense: homeController.totalExpense.value,
-                    remainingBudget: homeController.remainingBudget.value,
-                    homeController: homeController,
-                    userName: homeController.userName.value,
-                  ),
+        if (homeController.isLoading.value) {
+          return const HomeShimmer();
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Obx(
+              () => GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoutes.PROFILEPICTURE);
+                },
+                child: topContainer(
+                  context,
+                  monthlyBudget: homeController.monthlyBudget.value,
+                  totalExpense: homeController.totalExpense.value,
+                  remainingBudget: homeController.remainingBudget.value,
+                  homeController: homeController,
+                  userName: homeController.userName.value,
                 ),
-                AppSize.h16,
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Column(
-                      children: [
-                        budgetCardRecentTransactions(),
-                        AppSize.h16,
-                        Obx(
-                          () => amountUsedCard(
-                            context,
-                            usedAmount: homeController.totalExpense.value,
-                            totalAmount: homeController.monthlyBudget.value,
-                            percentageUsed:"${homeController.percentageUsed.toStringAsFixed(0)}%",
-                            progress: homeController.budgetProgress,
-                            homeController: homeController,
-                    ),
-                  ),
-                  AppSize.h16,
-                  budgetCardRecentTransactions(
-                    title: "Recent Transactions",
-                    secondaryTitle: "See All",
-                  ),
-                  AppSize.h8,
-                  
-                  Obx(
-                    () => recentTransactionList(
-                      expenses: homeController.expenses,
-                      homeController: homeController,
-                    ),
-                  ),
-                ],
               ),
             ),
-          ),
-        ],
-      );
-   } ));
+            AppSize.h16,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                  children: [
+                    budgetCardRecentTransactions(),
+                    AppSize.h16,
+                    Obx(
+                      () => amountUsedCard(
+                        context,
+                        usedAmount: homeController.totalExpense.value,
+                        totalAmount: homeController.monthlyBudget.value,
+                        percentageUsed:
+                            "${homeController.percentageUsed.toStringAsFixed(0)}%",
+                        progress: homeController.budgetProgress,
+                        homeController: homeController,
+                      ),
+                    ),
+                    AppSize.h16,
+                    budgetCardRecentTransactions(
+                      title: "Recent Transactions",
+                      secondaryTitle: "See All",
+                    ),
+                    AppSize.h8,
+
+                    Obx(
+                      () => recentTransactionList(
+                        expenses: homeController.expenses,
+                        homeController: homeController,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
+    );
   }
 }
 
@@ -91,7 +99,7 @@ Widget topContainer(
 }) {
   return Container(
     width: double.infinity,
-    height: AppSize.height(context, 0.5),
+    // height: AppSize.height(context, 0.5),
     decoration: BoxDecoration(
       gradient: LinearGradient(colors: [Color(0xFF0D1025), Color(0xFF161A38)]),
     ),
@@ -135,7 +143,7 @@ Widget topContainer(
               Container(
                 margin: EdgeInsets.only(bottom: 20.w),
                 width: double.infinity,
-                height: AppSize.height(context, 0.3),
+                // height: AppSize.height(context, 0.3),
                 decoration: BoxDecoration(
                   color: Color(0xFFFFFFFF).withOpacity(0.08),
                   borderRadius: BorderRadius.circular(22.r),

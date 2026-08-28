@@ -54,6 +54,17 @@ class TextConstant {
   static const String darkMode = 'Dark Mode';
   static const String currency = 'Currency';
   static const String logout = 'Logout';
+  static const String changePassword = 'Change Password';
+  static const String aboutApp = 'About App';
+
+//Profile Picture Screen
+  static const String profilePictureTitle = 'Add Profile Photo';
+  static const String uploadPhoto = 'Upload your Photo';
+  static const String addProfilePhoto = 'Add a profile photo to personalize your account';
+  static const String choosefromGallery = 'Choose from Gallery';
+  static const String removePhoto = 'Remove Photo';
+  static const String choosefromCamera = 'Choose from Camera';
+  static const String continueButton = 'Continue';
 
   //error messages
   static const String error = 'Error';

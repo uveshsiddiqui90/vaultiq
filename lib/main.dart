@@ -7,7 +7,7 @@ import 'package:vaultiq/app_routes/app_routes.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
- 
+
  await Supabase.initialize(
     url: "https://eqgilxxzbjfawidwncrn.supabase.co",
     anonKey: "sb_publishable_AuCr2nguwsuGVTg51fNnwA_H6J_4cTk",

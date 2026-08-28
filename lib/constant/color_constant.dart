@@ -33,6 +33,9 @@ class ColorConstant {
   static const Color purple       = Color(0xFF9B5CF6);
   static const Color purpleLight  = Color(0xFFF4EFFE);
   static const Color focusedFieldBg = Color(0xffE8FFF8);
+  static const Color profileGradientStart = Color(0xFF0B132B);
+  static const Color profileGradientMiddle = Color(0xFF10263A);
+  static const Color profileGradientEnd = Color(0xFF16B98B);
 
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
@@ -47,6 +50,22 @@ class ColorConstant {
   static const LinearGradient progressGradient = LinearGradient(
     colors: [primary, Color(0xFF00E5B0)],
   );
+
+  static const LinearGradient profileHeaderGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: [
+    profileGradientStart,
+    profileGradientMiddle,
+    profileGradientEnd,
+  ],
+  stops: [
+    0.0,
+    0.55,
+    1.0,
+  ],
+);
+
 }
     
     

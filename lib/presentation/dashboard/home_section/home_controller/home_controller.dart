@@ -37,8 +37,7 @@ class HomeController extends GetxController {
 
  Future<void> fetchExpenses() async {
   try {
-    final fetchedExpenses =
-        await _expenseService.fetchExpenses();
+    final fetchedExpenses = await _expenseService.fetchExpenses();
 
     expenses.assignAll(fetchedExpenses);
   } catch (e) {
