@@ -119,6 +119,7 @@ class ProfilePictureController extends GetxController {
         .getPublicUrl(filePath);
 
     debugPrint("Profile Image URL: $imageUrl");
+    
 
     return imageUrl;
   } catch (e) {

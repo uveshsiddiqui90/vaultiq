@@ -10,6 +10,7 @@ class EditProfileController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final args = Get.arguments;
   final UpdateProfile _updateProfileService = UpdateProfile();
+  final profileImageUrl = ''.obs;
 
   
 
@@ -20,7 +21,8 @@ class EditProfileController extends GetxController {
     super.onInit();
     nameController.text = args?["name"] ?? "";
     emailController.text = args?["email"] ?? "";
-    print("EditProfileController initialized with name: ${nameController.text}, email: ${emailController.text}");
+    profileImageUrl.value = args?["profileImageUrl"] ?? "";
+    print("EditProfileController initialized with name: ${nameController.text}, email: ${emailController.text}, profileImageUrl: ${profileImageUrl.value}");
     loadUserData();
   }
 

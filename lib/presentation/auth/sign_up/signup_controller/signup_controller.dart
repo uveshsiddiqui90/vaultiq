@@ -33,9 +33,8 @@ class SignupController extends GetxController {
         data: {'name': name},
       );
       if (response.user != null) {
-       // Get.toNamed(AppRoutes.DASHBOARD);
-       Get.toNamed(AppRoutes.ADDBUDGET);
-      } else {
+        Get.toNamed(AppRoutes.PROFILEPICTURE);
+        } else {
         Get.snackbar('Error', 'Sign up failed');
       }
      

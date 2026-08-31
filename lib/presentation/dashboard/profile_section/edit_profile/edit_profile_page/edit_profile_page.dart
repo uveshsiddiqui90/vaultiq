@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 import 'package:vaultiq/constant/app_padding/app_padding.dart';
@@ -57,12 +58,32 @@ class EditProfilePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    height: 120,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,
+                  Obx(
+                    () => Container(
+                      height: 120.h,
+                      width: 120.w,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue,
+                      ),
+                      child: editProfileController.profileImageUrl.value.isNotEmpty
+                          ? Image.network(
+                              editProfileController.profileImageUrl.value,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) {
+                                return const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 60,
+                                );
+                              },
+                            )
+                          : const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 60,
+                            ),
                     ),
                   ),
                   AppSize.h10,

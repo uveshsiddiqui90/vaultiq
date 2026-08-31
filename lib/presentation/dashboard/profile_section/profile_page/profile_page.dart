@@ -38,14 +38,38 @@ class ProfilePage extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      Container(
-                        width: 70.w,
-                        height: 70.h,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
+                       Container(
+                          width: 70.w,
+                          height: 70.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: Obx(() {
+                            if (profileController
+                                .profileImageUrl
+                                .value
+                                .isNotEmpty) {
+                              return CircleAvatar(
+                                radius: 35,
+                                backgroundImage: NetworkImage(
+                                  profileController.profileImageUrl.value,
+                                ),
+                              );
+                            } else {
+                              return CircleAvatar(
+                                radius: 35,
+                                backgroundColor: ColorConstant.primaryDark,
+                                child: Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
+                              );
+                            }
+                          }),
                         ),
-                      ),
+                      
                       AppSize.h10,
                       Text(
                         profileController.userName.value,
@@ -168,6 +192,7 @@ class ProfilePage extends StatelessWidget {
                           arguments: {
                             "name": profileController.userName.value,
                             "email": profileController.userEmail.value,
+                            "profileImageUrl": profileController.profileImageUrl.value,
                           },
                         );
                         // Handle edit profile tap

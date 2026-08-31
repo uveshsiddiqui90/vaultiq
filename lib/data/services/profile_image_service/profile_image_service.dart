@@ -32,4 +32,16 @@ class ProfileImageService {
 
     return imageUrl;
   }
+
+  String? getProfileImageUrl() {
+    final user = _supabase.auth.currentUser;
+
+    if (user == null) return null;
+
+    final userId = user.id;
+
+    return _supabase.storage
+        .from('avatars')
+        .getPublicUrl('$userId/profile.jpg');
+  }
 }

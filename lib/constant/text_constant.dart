@@ -65,6 +65,7 @@ class TextConstant {
   static const String removePhoto = 'Remove Photo';
   static const String choosefromCamera = 'Choose from Camera';
   static const String continueButton = 'Continue';
+  static const String skipButton = 'Skip';
 
   //error messages
   static const String error = 'Error';

@@ -3,6 +3,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vaultiq/app_routes/app_routes.dart';
 import 'package:vaultiq/data/services/budget_service/budget_service.dart';
 import 'package:vaultiq/data/services/expense_service/expense_service.dart';
+import 'package:vaultiq/data/services/profile_image_service/profile_image_service.dart';
+import 'package:vaultiq/data/services/profile_service/profile_service.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_model/addexpense_model.dart';
 
 class ProfileController extends GetxController {
@@ -16,10 +18,13 @@ class ProfileController extends GetxController {
   RxString userName = "User".obs;
   RxString userEmail = "".obs;
   RxBool isLoading = false.obs;
+  final ProfileImageService _profileService = ProfileImageService();
+  final profileImageUrl = ''.obs;
 
  @override
   void onInit() async {
     loadHomeData();
+    fetchProfileImage();
     super.onInit();
   }
 
@@ -79,6 +84,14 @@ class ProfileController extends GetxController {
       
     } catch (e) {
       print("❌ Logout Error: $e");
+    }
+  }
+
+   void fetchProfileImage() {
+    final imageUrl = _profileService.getProfileImageUrl();
+
+    if (imageUrl != null) {
+      profileImageUrl.value = imageUrl;
     }
   }
 }
