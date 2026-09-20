@@ -16,8 +16,7 @@ import '../profile_picture_controller/profile_picture_controller.dart';
 class ProfilePicturePage extends StatelessWidget {
   ProfilePicturePage({super.key});
 
-  final ProfilePictureController controller =
-      Get.find<ProfilePictureController>();
+  final ProfilePictureController controller = Get.find<ProfilePictureController>();
 
   @override
   Widget build(BuildContext context) {

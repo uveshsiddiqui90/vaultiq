@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vaultiq/app_utils/image_picker_bottomsheet/image_picker_bottomsheet.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 import 'package:vaultiq/constant/app_padding/app_padding.dart';
 import 'package:vaultiq/constant/app_size/app_size.dart';
@@ -59,15 +60,38 @@ class EditProfilePage extends StatelessWidget {
                     ],
                   ),
                   Obx(
-                    () => Container(
-                      height: 120.h,
-                      width: 120.w,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blue,
-                      ),
-                      child: editProfileController.profileImageUrl.value.isNotEmpty
+                    () => Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            
+                            ImagePickerBottomSheet.show(
+                              context: context,
+
+                              onCameraTap: () {
+                                editProfileController.pickFromCamera();
+                              },
+
+                              onGalleryTap: () {
+                                editProfileController.pickFromGallery();
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 120.h,
+                            width: 120.w,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blue,
+                            ),
+                            child:editProfileController.selectedImage.value != null
+                      ? Image.file(
+                          editProfileController.selectedImage.value!,
+                          fit: BoxFit.cover,
+                        )
+                      : editProfileController.profileImageUrl.value.isNotEmpty
                           ? Image.network(
                               editProfileController.profileImageUrl.value,
                               fit: BoxFit.cover,
@@ -84,6 +108,38 @@ class EditProfilePage extends StatelessWidget {
                               color: Colors.white,
                               size: 60,
                             ),
+                                            ),
+                        ),
+                        Visibility(
+                          visible: editProfileController
+                              .profileImageUrl
+                              .value
+                              .isNotEmpty,
+                          child: Positioned(
+                            bottom: 10,
+                            right: 0,
+                            child: Container(
+                              height: 30.h,
+                              width: 30.w,
+                              alignment: Alignment.bottomRight,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: ColorConstant.primary,
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: ColorConstant.white,
+                                  size: 18.sp,
+                                ),
+                                onPressed: () {
+                                  // Handle profile picture change
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   AppSize.h10,

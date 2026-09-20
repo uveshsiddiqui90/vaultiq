@@ -1,0 +1,17 @@
+6a6b68f profile picture updated
+2d2ae6a add_profile_photo
+58a7d26 three screen cpmpleted
+e65b171 dashboard ui done
+987ccb7 development_one
+bab39c1 Initial commit
+ M lib/data/services/profile_service/profile_service.dart
+ M lib/presentation/auth/profile_picture/profile_picture_page/profile_picture_page.dart
+ M lib/presentation/dashboard/profile_section/edit_profile/edit_profile_controller/edit_profile_controller.dart
+ M lib/presentation/dashboard/profile_section/edit_profile/edit_profile_page/edit_profile_page.dart
+ M lib/presentation/dashboard/profile_section/profile_controller/profile_controller.dart
+?? _files.txt
+?? _git.txt
+?? lib/app_utils/image_picker_bottomsheet/
+?? lib/data/models/
+?? lib/data/services/editprofile_service/
+?? lib/data/services/getname_service/
