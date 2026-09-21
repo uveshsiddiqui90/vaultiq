@@ -107,15 +107,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 AppSize.h20,
-                WidgetConstant.orWidget(context),
-                AppSize.h20,
-                CustomButton(
-                  label: TextConstant.loginWithGoogle,
-                  variant: ButtonVariant.outline,
-                  prefixIcon: Image.asset(IconConstant.googleIcon, width: 25),
-                  onPressed: () {},
-                ),
-                AppSize.h20,
                 Center(
                   child: AuthFooterText(
                     normalText: TextConstant.dontHaveAccount,

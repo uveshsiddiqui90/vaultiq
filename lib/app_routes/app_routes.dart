@@ -9,11 +9,7 @@ import 'package:vaultiq/presentation/auth/sign_up/signup_binding/signup_binding.
 import 'package:vaultiq/presentation/auth/sign_up/signup_page/signup_page.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_binding/dashboard_binding.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_page/dashboard_page.dart';
-import 'package:vaultiq/presentation/dashboard/home_section/home_binding/home_binding.dart';
-import 'package:vaultiq/presentation/dashboard/home_section/home_page/home_page.dart';
-import 'package:vaultiq/presentation/dashboard/profile_section/change_password/change_password_binding/change_password_binding.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/change_password/change_password_page/change_password_page.dart';
-import 'package:vaultiq/presentation/dashboard/profile_section/edit_profile/edit_profile_binding/edit_profile_binding.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/edit_profile/edit_profile_page/edit_profile_page.dart';
 
 
@@ -25,12 +21,7 @@ class AppPages {
       page: () => LoginPage(),
       binding: LoginBinding(),
     ),
-   
-   GetPage(
-      name: AppRoutes.SIGNUP,
-      page: () => SignupPage(),
-      binding: SignupBinding(),
-    ),
+
     GetPage(
       name: AppRoutes.SIGNUP,
       page: () => SignupPage(),
@@ -46,20 +37,13 @@ class AppPages {
       page: () => DashboardPage(),
       binding: DashboardBinding(),
     ),
-    GetPage(
-      name: AppRoutes.HOME,
-      page: () => HomePage(),
-      binding: HomeBinding(),
-    ),
       GetPage(
         name: AppRoutes.EDITPROFILE,
         page: () => EditProfilePage(),
-        binding: EditProfileBinding(),
       ),
       GetPage(
         name: AppRoutes.CHANGEPASSWORD,
         page: () => ChangePasswordPage(),
-        binding: ChangePasswordBinding(),
       ),
       GetPage(
         name: AppRoutes.PROFILEPICTURE,
@@ -76,7 +60,6 @@ class AppRoutes
     static const SIGNUP = '/signup';
     static const ADDBUDGET = '/addbudget';
     static const DASHBOARD = '/dashboard';
-    static const HOME = '/home';
     static const EDITPROFILE = '/editprofile';
     static const CHANGEPASSWORD = '/changepassword';
     static const PROFILEPICTURE = '/profilepicture';

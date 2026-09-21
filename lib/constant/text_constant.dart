@@ -10,8 +10,6 @@ class TextConstant {
   static const String passwordHint = 'Enter your password';
   static const String forgotPassword = 'Forgot Password?';
   static const String dontHaveAccount = "Don't have an account?";
-  static const String loginWithGoogle = 'Login with Google';
-  static const String or = 'or';
   static const String login = ' Login';
   static const String signUp = ' Sign Up';
 
@@ -26,7 +24,6 @@ class TextConstant {
   static const String emailSignUpHint = 'Enter your email';
   static const String confirmPasswordLabel = 'Confirm Password';
   static const String confirmPasswordHint = 'Re-enter your password';
-  static const String signUpwithGoogle = 'Sign Up with Google';
   static const String alreadyHaveAccount = 'Already have an account?';
 
   //Budget Screen

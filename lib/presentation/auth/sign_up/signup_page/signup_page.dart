@@ -136,19 +136,6 @@ class SignupPage extends StatelessWidget {
                   },
                 ),
                 AppSize.h20,
-                WidgetConstant.orWidget(context),
-                AppSize.h20,
-                CustomButton(
-                  label: TextConstant.signUpwithGoogle,
-                  variant: ButtonVariant.outline,
-                  onPressed: () {},
-                  prefixIcon: Image.asset(
-                    IconConstant.googleIcon,
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-                AppSize.h20,
                 Center(
                   child: AuthFooterText(
                     normalText: TextConstant.alreadyHaveAccount,
