@@ -1,4 +1,5 @@
 /// AddExpenseController V2 — refactored with validation & error handling
+library;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

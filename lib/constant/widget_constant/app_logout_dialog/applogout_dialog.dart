@@ -100,7 +100,7 @@ class AppLogoutDialog {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 8,
-                          shadowColor: const Color(0xffFF4F73).withOpacity(.45),
+                          shadowColor: const Color(0xffFF4F73).withValues(alpha: .45),
                           backgroundColor: const Color(0xffFF4F73),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.r),

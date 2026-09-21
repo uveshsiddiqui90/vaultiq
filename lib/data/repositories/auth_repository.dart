@@ -1,5 +1,6 @@
 /// Authentication Repository — single source for all auth operations
 /// Login, signup, password reset, session management
+library;
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vaultiq/core/errors/app_exception.dart';

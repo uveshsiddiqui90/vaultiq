@@ -1,30 +1,52 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:vaultiq/main.dart';
+import 'package:vaultiq/app_routes/app_routes.dart';
+import 'package:vaultiq/core/config/app_config.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('AppPages.routes', () {
+    test('registers every route name exactly once', () {
+      final names = AppPages.routes.map((r) => r.name).toList();
+      expect(
+        names.toSet().length,
+        names.length,
+        reason: 'Duplicate route names are registered in AppPages.routes',
+      );
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('contains every declared route', () {
+      final names = AppPages.routes.map((r) => r.name).toSet();
+      expect(
+        names,
+        containsAll(<String>[
+          AppRoutes.LOGIN,
+          AppRoutes.SIGNUP,
+          AppRoutes.ADDBUDGET,
+          AppRoutes.DASHBOARD,
+          AppRoutes.EDITPROFILE,
+          AppRoutes.CHANGEPASSWORD,
+          AppRoutes.PROFILEPICTURE,
+        ]),
+      );
+    });
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  group('AppConfig', () {
+    test('has sane validation limits', () {
+      expect(AppConfig.minBudgetAmount, lessThan(AppConfig.maxBudgetAmount));
+      expect(AppConfig.minExpenseAmount, greaterThan(0));
+      expect(AppConfig.minExpenseAmount, lessThan(AppConfig.maxExpenseAmount));
+      expect(AppConfig.maxNoteLength, greaterThan(0));
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('has real Supabase credentials (no placeholders)', () {
+      expect(AppConfig.supabaseUrl, startsWith('https://'));
+      expect(AppConfig.supabaseAnonKey, isNotEmpty);
+      expect(AppConfig.supabaseAnonKey, isNot(contains('your_key_here')));
+    });
+
+    test('uses a budget alert threshold between 0 and 1', () {
+      expect(AppConfig.budgetAlertThreshold, greaterThan(0));
+      expect(AppConfig.budgetAlertThreshold, lessThanOrEqualTo(1));
+    });
   });
 }

@@ -1,4 +1,5 @@
 /// BudgetController V2 — refactored with repository pattern & error handling
+library;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

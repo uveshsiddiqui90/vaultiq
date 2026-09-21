@@ -1,4 +1,5 @@
 /// ChangePasswordControllerV2 — secure password change with validation
+library;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

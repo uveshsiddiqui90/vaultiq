@@ -58,7 +58,7 @@ class ProfileOptionTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: ColorConstant.darkBg.withOpacity(0.5),
+              color: ColorConstant.darkBg.withValues(alpha: 0.5),
             ),
           ),
           trailing:

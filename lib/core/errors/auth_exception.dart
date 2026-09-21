@@ -5,7 +5,7 @@ class AuthErrorHandler {
   static String getMessage(dynamic e) {
 
     final error = e.toString().toLowerCase();
-     print("AuthErrorHandler: $error");
+
     // 🔐 Invalid credentials
     if (error.contains('invalid login credentials')) {
       return "Incorrect email or password";

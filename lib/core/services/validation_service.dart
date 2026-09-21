@@ -1,5 +1,6 @@
 /// Validation service — all input validation rules in one place
 /// Prevents invalid data from reaching Supabase
+library;
 
 import 'package:vaultiq/core/config/app_config.dart';
 import 'package:vaultiq/core/errors/app_exception.dart';
@@ -133,17 +134,21 @@ class ValidationService {
       throw InvalidExpenseException(message: 'Please select a date.');
     }
 
+    final DateTime expenseDate;
     try {
-      final expenseDate = DateTime.parse(dateString);
-      final today = DateTime.now();
-      final todayOnly = DateTime(today.year, today.month, today.day);
-
-      // Expense date should be today or in the past, not future
-      if (expenseDate.isAfter(todayOnly)) {
-        throw InvalidExpenseException(message: 'Expense date cannot be in the future.');
-      }
+      expenseDate = DateTime.parse(dateString);
     } catch (e) {
       throw InvalidExpenseException(message: 'Invalid date format.');
+    }
+
+    final today = DateTime.now();
+    final todayOnly = DateTime(today.year, today.month, today.day);
+
+    // Expense date should be today or in the past, not future
+    if (expenseDate.isAfter(todayOnly)) {
+      throw InvalidExpenseException(
+        message: 'Expense date cannot be in the future.',
+      );
     }
   }
 

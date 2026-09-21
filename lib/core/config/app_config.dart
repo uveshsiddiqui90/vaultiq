@@ -1,5 +1,6 @@
 /// Application configuration — centralized environment & API settings
 /// No hardcoded credentials — all from one place
+library;
 
 class AppConfig {
   AppConfig._();
@@ -11,8 +12,11 @@ class AppConfig {
   /// Supabase project URL — kept as const but should be from .env in production
   static const String supabaseUrl = 'https://eqgilxxzbjfawidwncrn.supabase.co';
 
-  /// Supabase anonymous key — should be from .env in production
-  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxZ2lseHh6YmpmYXdpZHduY3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTczOTAwNDksImV4cCI6MjAzMjk2NjA0OX0.your_key_here';
+  /// Supabase publishable (anon) key — safe to ship inside the client.
+  /// NOTE(config): move both URL and key into a .env file (flutter_dotenv) so
+  /// they are not committed to the repository.
+  static const String supabaseAnonKey =
+      'sb_publishable_AuCr2nguwsuGVTg51fNnwA_H6J_4cTk';
 
   // ──────────────────────────────────────────────────────────
   // APP BEHAVIOR SETTINGS

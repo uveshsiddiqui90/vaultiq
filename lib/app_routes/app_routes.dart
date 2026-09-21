@@ -1,3 +1,7 @@
+// Route name constants intentionally use SCREAMING_SNAKE_CASE so they read as
+// route identifiers (e.g. AppRoutes.LOGIN). Naming lint suppressed for this file.
+// ignore_for_file: constant_identifier_names
+
 import 'package:get/get.dart';
 import 'package:vaultiq/presentation/add_budget/add_budget_binding/add_budget_binding.dart';
 import 'package:vaultiq/presentation/add_budget/add_budget_page/add_budget_page.dart';

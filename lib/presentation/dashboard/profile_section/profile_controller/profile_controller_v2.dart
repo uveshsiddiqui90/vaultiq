@@ -1,4 +1,5 @@
 /// ProfileController V2 — refactored with repositories & error handling
+library;
 
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

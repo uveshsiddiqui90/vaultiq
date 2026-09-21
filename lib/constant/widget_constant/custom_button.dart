@@ -97,7 +97,7 @@ class CustomButton extends StatelessWidget {
           boxShadow: variant == ButtonVariant.primary
               ? [
                   BoxShadow(
-                    color: ColorConstant.primary.withOpacity(0.25),
+                    color: ColorConstant.primary.withValues(alpha: 0.25),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   ),

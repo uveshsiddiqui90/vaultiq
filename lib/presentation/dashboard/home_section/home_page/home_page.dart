@@ -17,7 +17,6 @@ import 'package:vaultiq/presentation/dashboard/home_section/shimmer/home_shimmer
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final HomeControllerV2 homeController = Get.put(HomeControllerV2());
-  GreetingHelper? greetingHelper;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +157,7 @@ Widget topContainer(
                 width: double.infinity,
                 // height: AppSize.height(context, 0.3),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF).withOpacity(0.08),
+                  color: Color(0xFFFFFFFF).withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(22.r),
                   border: Border.all(
                     color: Colors.white.withAlpha(100),
@@ -240,7 +239,7 @@ Widget thisMonthCard(
 ) {
   return Container(
     decoration: BoxDecoration(
-      color: Color(0xFFFFFFFF).withOpacity(0.08),
+      color: Color(0xFFFFFFFF).withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(12.r),
     ),
     child: Padding(

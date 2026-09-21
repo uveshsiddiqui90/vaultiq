@@ -1,5 +1,6 @@
 /// Budget Repository — handle all monthly budget operations
 /// Auto-carry-forward logic, validation, and error handling
+library;
 
 import 'package:intl/intl.dart';
 import 'package:vaultiq/core/services/logger_service.dart';

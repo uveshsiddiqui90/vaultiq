@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 import 'package:vaultiq/constant/app_padding/app_padding.dart';
 import 'package:vaultiq/constant/app_size/app_size.dart';

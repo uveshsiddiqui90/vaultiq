@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
 
 class AppBottomSheet {
   static Future<void> showAmountBottomSheet({

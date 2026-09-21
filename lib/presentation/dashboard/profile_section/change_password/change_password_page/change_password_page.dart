@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vaultiq/constant/app_fontweight/app_fontweight.dart';
-import 'package:vaultiq/constant/app_padding/app_padding.dart';
-import 'package:vaultiq/constant/app_size/app_size.dart';
 import 'package:vaultiq/constant/app_style/app_style.dart';
-import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
-import 'package:vaultiq/constant/widget_constant/custom_textfield.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/change_password/change_password_controller/change_password_controller_v2.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   ChangePasswordPage({super.key});
-  ChangePasswordControllerV2 changePasswordController =
-      Get.put(ChangePasswordControllerV2());
+  final ChangePasswordControllerV2 changePasswordController = Get.put(
+    ChangePasswordControllerV2(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +41,7 @@ class ChangePasswordPage extends StatelessWidget {
                       width: 40.w,
                       height: 40.h,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Icon(
@@ -68,7 +65,7 @@ class ChangePasswordPage extends StatelessWidget {
                     'Keep your account secure',
                     style: AppStyles.dmSans(
                       size: 12.sp,
-                      color: Colors.white.withOpacity(0.6),
+                      color: Colors.white.withValues(alpha: 0.6),
                     ),
                   ),
                   SizedBox(height: 20.h),

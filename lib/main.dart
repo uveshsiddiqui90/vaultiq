@@ -3,14 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vaultiq/app_routes/app_routes.dart';
+import 'package:vaultiq/constant/color_constant.dart';
+import 'package:vaultiq/core/config/app_config.dart';
 
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
 
  await Supabase.initialize(
-    url: "https://eqgilxxzbjfawidwncrn.supabase.co",
-    anonKey: "sb_publishable_AuCr2nguwsuGVTg51fNnwA_H6J_4cTk",
+    url: AppConfig.supabaseUrl,
+    anonKey: AppConfig.supabaseAnonKey,
   );
 runApp(const MyApp());
 }
@@ -34,9 +36,12 @@ class MyApp extends StatelessWidget
             debugShowCheckedModeBanner: false,
             initialRoute: getInitialRoute(), 
             getPages: AppPages.routes,
-            title: 'Flutter Demo',
+            title: AppConfig.appName,
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: ColorConstant.primary,
+              ),
+              scaffoldBackgroundColor: ColorConstant.primaryColor,
             ),
             
        ));

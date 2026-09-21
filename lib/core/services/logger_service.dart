@@ -1,6 +1,11 @@
 /// Logging service — centralized logging instead of print() statements
 /// Better for production debugging and monitoring
+library;
 
+// ignore_for_file: avoid_print
+//
+// This service is the single logging abstraction for the app and intentionally
+// wraps the Dart print() API, so avoid_print is suppressed for this file only.
 import 'package:intl/intl.dart';
 
 enum LogLevel { debug, info, warning, error }

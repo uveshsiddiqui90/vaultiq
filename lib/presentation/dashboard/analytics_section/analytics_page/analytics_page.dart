@@ -267,7 +267,7 @@ class AnalyticsPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: ColorConstant.primary.withOpacity(0.3),
+            color: ColorConstant.primary.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -282,7 +282,7 @@ class AnalyticsPage extends StatelessWidget {
             child: Icon(
               Icons.account_balance_wallet_rounded,
               size: 90.sp,
-              color: Colors.white.withOpacity(0.15),
+              color: Colors.white.withValues(alpha: 0.15),
             ),
           ),
           Column(
@@ -293,7 +293,7 @@ class AnalyticsPage extends StatelessWidget {
                 style: AppStyles.dmSans(
                   size: AppTextSize.body,
                   weight: AppFontWeight.semiBold,
-                  color: Colors.white.withOpacity(0.85),
+                  color: Colors.white.withValues(alpha: 0.85),
                 ),
               ),
               AppSize.h8,
@@ -340,7 +340,7 @@ class AnalyticsPage extends StatelessWidget {
                       style: AppStyles.dmSans(
                         size: AppTextSize.small,
                         weight: AppFontWeight.medium,
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ],
@@ -500,7 +500,7 @@ class AnalyticsPage extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Icon(_categoryIcon(category.category), color: color, size: 18.sp),

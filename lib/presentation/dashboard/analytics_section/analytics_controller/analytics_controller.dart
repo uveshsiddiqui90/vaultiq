@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:vaultiq/core/services/logger_service.dart';
 import 'package:vaultiq/data/services/budget_service/budget_service.dart';
 import 'package:vaultiq/data/services/expense_service/expense_service.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_model/addexpense_model.dart';
@@ -54,8 +55,8 @@ class AnalyticsController extends GetxController {
     try {
       final data = await _expenseService.fetchExpenses();
       allExpenses.assignAll(data);
-    } catch (e) {
-      print("Error fetching expenses: $e");
+    } catch (e, st) {
+      logError('Error fetching expenses', error: e, st: st);
     }
   }
 
@@ -63,8 +64,8 @@ class AnalyticsController extends GetxController {
     try {
       final budget = await _budgetService.fetchBudget();
       monthlyBudget.value = budget ?? 0.0;
-    } catch (e) {
-      print("Error fetching budget: $e");
+    } catch (e, st) {
+      logError('Error fetching budget', error: e, st: st);
     }
   }
 
@@ -72,8 +73,8 @@ class AnalyticsController extends GetxController {
     try {
       isLoading.value = true;
       await Future.wait([fetchExpenses(), fetchBudget()]);
-    } catch (e) {
-      print(e);
+    } catch (e, st) {
+      logError('Failed to load analytics data', error: e, st: st);
     } finally {
       isLoading.value = false;
     }

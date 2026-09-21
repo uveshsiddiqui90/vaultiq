@@ -12,7 +12,7 @@ import 'package:vaultiq/presentation/dashboard/profile_section/edit_profile/edit
 class EditProfilePage extends StatelessWidget {
   EditProfilePage({super.key});
 
-  EditProfileControllerV2 editProfileController = Get.put(
+  final EditProfileControllerV2 editProfileController = Get.put(
     EditProfileControllerV2(),
   );
 

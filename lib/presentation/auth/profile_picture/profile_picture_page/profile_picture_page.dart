@@ -90,7 +90,7 @@ class ProfilePicturePage extends StatelessWidget {
                         width: 170.w,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: ColorConstant.inkMuted.withOpacity(0.2),
+                          color: ColorConstant.inkMuted.withValues(alpha: 0.2),
 
                           image: controller.profileImage.value != null
                               ? DecorationImage(

@@ -1,7 +1,7 @@
 /// Expense Repository — single source of truth for all expense operations
 /// Wraps ExpenseService and handles error conversion, validation, logging
+library;
 
-import 'package:vaultiq/core/errors/app_exception.dart';
 import 'package:vaultiq/core/services/logger_service.dart';
 import 'package:vaultiq/core/services/validation_service.dart';
 import 'package:vaultiq/data/services/expense_service/expense_service.dart';
@@ -105,8 +105,8 @@ class ExpenseRepository {
         .fold(0.0, (sum, e) => sum + e.amount);
   }
 
-  /// Group expenses by category with totals
-  /// Returns: Map<category, total_amount>
+  /// Group expenses by category with totals.
+  /// Returns a map of category to total amount.
   Map<String, double> groupByCategory(List<ExpenseModel> expenses) {
     final grouped = <String, double>{};
     for (final expense in expenses) {

@@ -1,6 +1,7 @@
 /// HomeController V2 — refactored with proper architecture
 /// Uses repositories, error handling, logging, validation
 /// This is a replacement for the old home_controller.dart
+library;
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -107,7 +108,7 @@ class HomeControllerV2 extends GetxController {
       final name = _authRepository.getUserName();
       userName.value = name;
       logDebug('User name: $name');
-    } catch (e, st) {
+    } catch (e) {
       logWarn('Could not fetch user name');
       logDebug('Error: $e');
       userName.value = 'User'; // Fallback

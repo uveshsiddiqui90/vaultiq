@@ -1,5 +1,6 @@
 /// Custom exception classes — structured error handling across the app
 /// Helps in debugging and showing user-friendly error messages
+library;
 
 abstract class AppException implements Exception {
   /// User-friendly error message shown in UI
@@ -27,50 +28,26 @@ abstract class AppException implements Exception {
 
 /// User entered wrong email/password
 class InvalidCredentialsException extends AppException {
-  InvalidCredentialsException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'Invalid email or password. Please try again.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  InvalidCredentialsException({super.originalException, super.stackTrace})
+    : super(message: 'Invalid email or password. Please try again.');
 }
 
 /// Email already exists in system
 class EmailAlreadyExistsException extends AppException {
-  EmailAlreadyExistsException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'This email is already registered. Please login instead.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  EmailAlreadyExistsException({super.originalException, super.stackTrace})
+    : super(message: 'This email is already registered. Please login instead.');
 }
 
 /// User not found (for password reset, etc)
 class UserNotFoundException extends AppException {
-  UserNotFoundException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'User account not found.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  UserNotFoundException({super.originalException, super.stackTrace})
+    : super(message: 'User account not found.');
 }
 
 /// Session expired — user needs to login again
 class SessionExpiredException extends AppException {
-  SessionExpiredException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'Your session has expired. Please login again.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  SessionExpiredException({super.originalException, super.stackTrace})
+    : super(message: 'Your session has expired. Please login again.');
 }
 
 /// ─────────────────────────────────────────────────────────
@@ -80,40 +57,28 @@ class SessionExpiredException extends AppException {
 /// Input validation failed — amount, email format, etc
 class ValidationException extends AppException {
   ValidationException({
-    required String message,
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: message,
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+    required super.message,
+    super.originalException,
+    super.stackTrace,
+  });
 }
 
 /// Budget validation failed (amount out of range, etc)
 class InvalidBudgetException extends AppException {
   InvalidBudgetException({
-    required String message,
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: message,
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+    required super.message,
+    super.originalException,
+    super.stackTrace,
+  });
 }
 
 /// Expense validation failed (amount, category, etc)
 class InvalidExpenseException extends AppException {
   InvalidExpenseException({
-    required String message,
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: message,
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+    required super.message,
+    super.originalException,
+    super.stackTrace,
+  });
 }
 
 /// ─────────────────────────────────────────────────────────
@@ -122,52 +87,34 @@ class InvalidExpenseException extends AppException {
 
 /// No internet connection or network error
 class NetworkException extends AppException {
-  NetworkException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'Network error. Please check your connection and try again.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  NetworkException({super.originalException, super.stackTrace})
+    : super(
+        message: 'Network error. Please check your connection and try again.',
+      );
 }
 
 /// Server error (500, etc) — database down, Supabase issue
 class ServerException extends AppException {
   ServerException({
     String? message,
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: message ?? 'Server error. Please try again later.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+    super.originalException,
+    super.stackTrace,
+  }) : super(message: message ?? 'Server error. Please try again later.');
 }
 
 /// Database operation failed
 class DatabaseException extends AppException {
   DatabaseException({
-    required String message,
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: message,
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+    required super.message,
+    super.originalException,
+    super.stackTrace,
+  });
 }
 
 /// Timeout — operation took too long
 class TimeoutException extends AppException {
-  TimeoutException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'Request timed out. Please try again.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  TimeoutException({super.originalException, super.stackTrace})
+    : super(message: 'Request timed out. Please try again.');
 }
 
 /// ─────────────────────────────────────────────────────────
@@ -176,14 +123,8 @@ class TimeoutException extends AppException {
 
 /// Unknown error — fallback for unexpected exceptions
 class UnknownException extends AppException {
-  UnknownException({
-    dynamic originalException,
-    StackTrace? stackTrace,
-  }) : super(
-    message: 'Something went wrong. Please try again.',
-    originalException: originalException,
-    stackTrace: stackTrace,
-  );
+  UnknownException({super.originalException, super.stackTrace})
+    : super(message: 'Something went wrong. Please try again.');
 }
 
 /// ─────────────────────────────────────────────────────────

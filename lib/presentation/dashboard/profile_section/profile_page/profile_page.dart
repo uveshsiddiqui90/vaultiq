@@ -16,7 +16,7 @@ import 'package:vaultiq/presentation/dashboard/profile_section/widget/profile_op
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  ProfileControllerV2 profileController = Get.put(ProfileControllerV2());
+  final ProfileControllerV2 profileController = Get.put(ProfileControllerV2());
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +255,7 @@ class ProfilePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 3), // changes position of shadow
