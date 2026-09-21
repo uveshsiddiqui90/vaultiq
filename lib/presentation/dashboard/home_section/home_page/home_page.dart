@@ -11,12 +11,12 @@ import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/icon_constant.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_model/addexpense_model.dart';
-import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller.dart';
+import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller_v2.dart';
 import 'package:vaultiq/presentation/dashboard/home_section/shimmer/home_shimmer.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  final HomeController homeController = Get.put(HomeController());
+  final HomeControllerV2 homeController = Get.put(HomeControllerV2());
   GreetingHelper? greetingHelper;
 
   @override
@@ -51,7 +51,11 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   children: [
-                    budgetCardRecentTransactions(),
+                    budgetCardRecentTransactions(
+                      onSecondaryTap: () {
+                        Get.toNamed(AppRoutes.ADDBUDGET);
+                      },
+                    ),
                     AppSize.h16,
                     Obx(
                       () => amountUsedCard(
@@ -68,6 +72,15 @@ class HomePage extends StatelessWidget {
                     budgetCardRecentTransactions(
                       title: "Recent Transactions",
                       secondaryTitle: "See All",
+                      onSecondaryTap: () {
+                        // Navigate to Analytics tab (index 3 in dashboard)
+                        try {
+                          final dashboardController = Get.find();
+                          dashboardController.changeTab(3);
+                        } catch (e) {
+                          Get.toNamed(AppRoutes.DASHBOARD);
+                        }
+                      },
                     ),
                     AppSize.h8,
 
@@ -93,7 +106,7 @@ Widget topContainer(
   double monthlyBudget = 0.0,
   double totalExpense = 0.0,
   double remainingBudget = 0.0,
-  HomeController? homeController,
+  HomeControllerV2? homeController,
   String greeting = "Good Morning",
   String userName = "User",
 }) {
@@ -264,34 +277,36 @@ Widget thisMonthCard(
 Widget budgetCardRecentTransactions({
   String title = "Budget Overview",
   String secondaryTitle = "Edit",
+  VoidCallback? onSecondaryTap,
 }) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-    children: [
-      Text(
-        title,
-        style: AppStyles.syne(
-          size: AppTextSize.body,
-          weight: AppFontWeight.extraBold,
-          color: ColorConstant.txtColor,
-        ),
-      ),
-
-      Row(
-        children: [
-          Text(
-            secondaryTitle,
-            style: AppStyles.syne(
-              size: AppTextSize.body,
-              weight: AppFontWeight.bold,
-              color: ColorConstant.blue,
-            ),
+  return GestureDetector(
+    onTap: onSecondaryTap,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: AppStyles.syne(
+            size: AppTextSize.body,
+            weight: AppFontWeight.extraBold,
+            color: ColorConstant.txtColor,
           ),
-          Icon(Icons.arrow_forward, size: 16.sp, color: ColorConstant.blue),
-        ],
-      ),
-    ],
+        ),
+        Row(
+          children: [
+            Text(
+              secondaryTitle,
+              style: AppStyles.syne(
+                size: AppTextSize.body,
+                weight: AppFontWeight.bold,
+                color: ColorConstant.blue,
+              ),
+            ),
+            Icon(Icons.arrow_forward, size: 16.sp, color: ColorConstant.blue),
+          ],
+        ),
+      ],
+    ),
   );
 }
 
@@ -301,7 +316,7 @@ Widget amountUsedCard(
   double totalAmount = 25000,
   String percentageUsed = "34%",
   double progress = 0.34,
-  HomeController? homeController,
+  HomeControllerV2? homeController,
 }) {
   return Container(
     width: double.infinity,
@@ -470,7 +485,7 @@ Widget reecentTransactionList({
 
 Widget recentTransactionList({
   required RxList<ExpenseModel> expenses,
-  required HomeController homeController,
+  required HomeControllerV2 homeController,
 }) {
   if (expenses.isEmpty) {
     return Expanded(

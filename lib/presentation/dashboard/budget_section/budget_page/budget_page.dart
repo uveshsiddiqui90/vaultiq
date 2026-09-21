@@ -11,14 +11,14 @@ import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
 import 'package:vaultiq/constant/widget_constant/app_bottom_nav/bottom_nav.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
-import 'package:vaultiq/presentation/dashboard/budget_section/budget_controller/budget_controller.dart';
+import 'package:vaultiq/presentation/dashboard/budget_section/budget_controller/budget_controller_v2.dart';
 import 'package:vaultiq/presentation/dashboard/budget_section/shimmer/budget_shimmer.dart';
-import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller.dart';
+import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller_v2.dart';
 
 class BudgetPage extends StatelessWidget {
   BudgetPage({super.key});
-  final BudgetController budgetController = Get.put(BudgetController());
-  final HomeController homeController = Get.find<HomeController>();
+  final BudgetControllerV2 budgetController = Get.put(BudgetControllerV2());
+  final HomeControllerV2 homeController = Get.find<HomeControllerV2>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,9 @@ class BudgetPage extends StatelessWidget {
                 onPressed: () {
                   AppBottomSheet.showAmountBottomSheet(
                     context: context,
-                    controller: budgetController.budgettxt,
+                    controller: budgetController.budgetInputController,
                     onSave: () async {
-                      budgetController.saveBudget();
+                      await budgetController.updateBudgetAmount();
                     },
                   );
                 },

@@ -10,21 +10,23 @@ import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
 import 'package:vaultiq/constant/widget_constant/app_logout_dialog/applogout_dialog.dart';
-import 'package:vaultiq/presentation/dashboard/profile_section/profile_controller/profile_controller.dart';
+import 'package:vaultiq/presentation/dashboard/profile_section/profile_controller/profile_controller_v2.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/widget/profile_option_tile.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  ProfileController profileController = Get.put(ProfileController());
+  ProfileControllerV2 profileController = Get.put(ProfileControllerV2());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstant.bgLight,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+      body: RefreshIndicator(
+        onRefresh: () => profileController.refreshProfile(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
           Stack(
             clipBehavior: Clip.none,
             children: [
@@ -93,18 +95,18 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             profiledesc(
-                              profileController.totalExpense.value.toString(),
+                              profileController.totalExpenseAmount.value.toString(),
                               "Spent",
                             ),
                             Divider(color: Colors.white, thickness: 1),
                             profiledesc(
-                              profileController.totalTransaction.value
+                              profileController.totalTransactions.value
                                   .toString(),
                               "Transactions",
                             ),
                             Divider(color: Colors.white, thickness: 1),
                             profiledesc(
-                              profileController.remainingBudget.value
+                              profileController.totalSavedAmount.value
                                   .toString(),
                               "Saved",
                             ),
@@ -131,14 +133,14 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       topDatadesc(
                         title: "Spent",
-                        data: profileController.totalExpense.value.toString(),
+                        data: profileController.totalExpenseAmount.value.toString(),
                         color: ColorConstant.focusedFieldBg,
                         iconData: Icons.arrow_downward,
                         iconColor: ColorConstant.primaryDark,
                       ),
                       topDatadesc(
                         title: "Transactions",
-                        data: profileController.totalTransaction.value
+                        data: profileController.totalTransactions.value
                             .toString(),
                         iconData: Icons.note,
                         color: ColorConstant.txtColor2nd.withAlpha(50),
@@ -146,7 +148,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       topDatadesc(
                         title: "Saved",
-                        data: profileController.remainingBudget.value
+                        data: profileController.totalSavedAmount.value
                             .toString(),
                         iconData: Icons.arrow_upward,
                         color: ColorConstant.red.withAlpha(50),
@@ -240,6 +242,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
         ],
+        ),
       ),
     );
   }

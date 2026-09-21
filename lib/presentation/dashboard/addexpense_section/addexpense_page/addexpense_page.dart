@@ -12,11 +12,12 @@ import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
 import 'package:vaultiq/constant/widget_constant/custom_textfield.dart';
 import 'package:vaultiq/constant/widget_constant/cutom_datefield.dart';
-import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_controller/addexpense_controller.dart';
+import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_controller/addexpense_controller_v2.dart';
+import 'package:get/get.dart';
 
 class AddexpensePage extends StatelessWidget {
   AddexpensePage({super.key});
-  final AddExpenseController addExpenseController = AddExpenseController();
+  final AddExpenseControllerV2 addExpenseController = Get.put(AddExpenseControllerV2());
 
   @override
   Widget build(BuildContext context) {
