@@ -117,7 +117,10 @@ class ProfileControllerV2 extends GetxController {
         'Spent=₹$totalExpenseAmount, Saved=₹$totalSavedAmount',
       );
     } catch (e, st) {
+      // Rethrow so loadProfileData() can surface the failure to the user
+      // instead of silently leaving the stats at zero.
       logError('Failed to load statistics', error: e, st: st);
+      rethrow;
     }
   }
 
