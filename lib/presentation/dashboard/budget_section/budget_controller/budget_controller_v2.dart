@@ -10,6 +10,7 @@ import 'package:vaultiq/core/services/validation_service.dart';
 import 'package:vaultiq/data/repositories/budget_repository.dart';
 import 'package:vaultiq/data/repositories/expense_repository.dart';
 import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
+import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
 
 class BudgetControllerV2 extends GetxController {
   // ──────────────────────────────────────────────────────────
@@ -50,6 +51,14 @@ class BudgetControllerV2 extends GetxController {
   void onInit() {
     super.onInit();
     loadBudgetData();
+
+    // Reload this tab's data whenever the user switches back to it.
+    if (Get.isRegistered<DashboardController>()) {
+      Get.find<DashboardController>().registerTabRefresher(
+        DashboardTabs.budget,
+        loadBudgetData,
+      );
+    }
   }
 
   @override

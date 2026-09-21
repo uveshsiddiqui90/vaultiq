@@ -11,6 +11,7 @@ import 'package:vaultiq/data/repositories/auth_repository.dart';
 import 'package:vaultiq/data/repositories/budget_repository.dart';
 import 'package:vaultiq/data/repositories/expense_repository.dart';
 import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
+import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
 
 class ProfileControllerV2 extends GetxController {
   // ──────────────────────────────────────────────────────────
@@ -40,6 +41,14 @@ class ProfileControllerV2 extends GetxController {
   void onInit() {
     super.onInit();
     loadProfileData();
+
+    // Reload this tab's data whenever the user switches back to it.
+    if (Get.isRegistered<DashboardController>()) {
+      Get.find<DashboardController>().registerTabRefresher(
+        DashboardTabs.profile,
+        loadProfileData,
+      );
+    }
   }
 
   // ──────────────────────────────────────────────────────────

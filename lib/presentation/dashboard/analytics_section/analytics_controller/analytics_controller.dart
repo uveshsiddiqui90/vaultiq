@@ -4,6 +4,7 @@ import 'package:vaultiq/core/services/logger_service.dart';
 import 'package:vaultiq/data/services/budget_service/budget_service.dart';
 import 'package:vaultiq/data/services/expense_service/expense_service.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_model/addexpense_model.dart';
+import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
 
 enum AnalyticsFilter { thisMonth, lastMonth, allTime }
 
@@ -34,6 +35,14 @@ class AnalyticsController extends GetxController {
   void onInit() {
     super.onInit();
     loadAnalyticsData();
+
+    // Reload this tab's data whenever the user switches back to it.
+    if (Get.isRegistered<DashboardController>()) {
+      Get.find<DashboardController>().registerTabRefresher(
+        DashboardTabs.analytics,
+        loadAnalyticsData,
+      );
+    }
   }
 
   String get filterLabel {
