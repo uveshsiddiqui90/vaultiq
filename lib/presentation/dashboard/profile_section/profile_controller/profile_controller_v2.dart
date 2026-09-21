@@ -4,6 +4,7 @@ library;
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:vaultiq/app_routes/app_routes.dart';
 import 'package:vaultiq/core/errors/app_exception.dart';
 import 'package:vaultiq/core/services/logger_service.dart';
 import 'package:vaultiq/data/repositories/auth_repository.dart';
@@ -123,7 +124,7 @@ class ProfileControllerV2 extends GetxController {
       logInfo('Logout successful');
 
       // Navigate to login
-      Get.offAllNamed('/login');
+      Get.offAllNamed(AppRoutes.LOGIN);
       AppSnackbar.success(message: 'Logged out successfully');
     } on AppException catch (e) {
       logError('Logout failed', error: e);
