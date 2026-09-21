@@ -24,23 +24,27 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: ColorConstant.bgLight,
       body: RefreshIndicator(
         onRefresh: () => profileController.refreshProfile(),
-        child: Column(
+        // The entire body is wrapped in Obx so every Rx value read below
+        // (name, email, spent, transactions, saved) rebuilds the page as soon
+        // as the asynchronous load finishes. Without this only the avatar was
+        // reactive and the stats stayed on their initial zeros until a reload.
+        child: Obx(() => Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-                width: double.infinity,
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+                  width: double.infinity,
 
-                decoration: BoxDecoration(
-                  gradient: ColorConstant.profileHeaderGradient,
-                ),
-                child: Center(
-                  child: Column(
-                    children: [
-                       Container(
+                  decoration: BoxDecoration(
+                    gradient: ColorConstant.profileHeaderGradient,
+                  ),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Container(
                           width: 70.w,
                           height: 70.h,
                           decoration: BoxDecoration(
@@ -71,178 +75,179 @@ class ProfilePage extends StatelessWidget {
                             }
                           }),
                         ),
-                      
-                      AppSize.h10,
-                      Text(
-                        profileController.userName.value,
-                        style: AppStyles.syne(
-                          size: AppTextSize.title,
-                          weight: AppFontWeight.semiBold,
-                          color: ColorConstant.white,
+
+                        AppSize.h10,
+                        Text(
+                          profileController.userName.value,
+                          style: AppStyles.syne(
+                            size: AppTextSize.title,
+                            weight: AppFontWeight.semiBold,
+                            color: ColorConstant.white,
+                          ),
                         ),
-                      ),
-                      Text(
-                        profileController.userEmail.value,
-                        style: AppStyles.dmSans(
-                          size: AppTextSize.medium,
-                          weight: AppFontWeight.semiBold,
-                          color: ColorConstant.white,
+                        Text(
+                          profileController.userEmail.value,
+                          style: AppStyles.dmSans(
+                            size: AppTextSize.medium,
+                            weight: AppFontWeight.semiBold,
+                            color: ColorConstant.white,
+                          ),
                         ),
-                      ),
-                      AppSize.h10,
-                      Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            profiledesc(
-                              profileController.totalExpenseAmount.value.toString(),
-                              "Spent",
-                            ),
-                            Divider(color: Colors.white, thickness: 1),
-                            profiledesc(
-                              profileController.totalTransactions.value
-                                  .toString(),
-                              "Transactions",
-                            ),
-                            Divider(color: Colors.white, thickness: 1),
-                            profiledesc(
-                              profileController.totalSavedAmount.value
-                                  .toString(),
-                              "Saved",
-                            ),
-                          ],
+                        AppSize.h10,
+                         Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              profiledesc(
+                                profileController.totalExpenseAmount.value.toString(),
+                                "Spent",
+                              ),
+                              Divider(color: Colors.white, thickness: 1),
+                              profiledesc(
+                                profileController.totalTransactions.value
+                                    .toString(),
+                                "Transactions",
+                              ),
+                              Divider(color: Colors.white, thickness: 1),
+                              profiledesc(
+                                profileController.totalSavedAmount.value
+                                    .toString(),
+                                "Saved",
+                              ),
+                            ],
+                          
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: -40,
-                right: 20,
-                left: 20,
+                Positioned(
+                  bottom: -40,
+                  right: 20,
+                  left: 20,
 
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    color: ColorConstant.primaryColor,
-                    borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: ColorConstant.primaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        topDatadesc(
+                          title: "Spent",
+                          data: profileController.totalExpenseAmount.value
+                              .toString(),
+                          color: ColorConstant.focusedFieldBg,
+                          iconData: Icons.arrow_downward,
+                          iconColor: ColorConstant.primaryDark,
+                        ),
+                        topDatadesc(
+                          title: "Transactions",
+                          data: profileController.totalTransactions.value
+                              .toString(),
+                          iconData: Icons.note,
+                          color: ColorConstant.txtColor2nd.withAlpha(50),
+                          iconColor: ColorConstant.txtColor2nd,
+                        ),
+                        topDatadesc(
+                          title: "Saved",
+                          data: profileController.totalSavedAmount.value
+                              .toString(),
+                          iconData: Icons.arrow_upward,
+                          color: ColorConstant.red.withAlpha(50),
+                          iconColor: ColorConstant.red,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ),
+              ],
+            ),
+            AppSize.h20,
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(), // ⭐ CHANGED
+                padding: EdgeInsets.only(bottom: 100.h),
+                child: Padding(
+                  padding: AppPadding.screen,
+                  child: Column(
                     children: [
-                      topDatadesc(
-                        title: "Spent",
-                        data: profileController.totalExpenseAmount.value.toString(),
-                        color: ColorConstant.focusedFieldBg,
-                        iconData: Icons.arrow_downward,
-                        iconColor: ColorConstant.primaryDark,
+                      AppSize.h40,
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Account",
+                          style: AppStyles.syne(
+                            size: AppTextSize.title,
+                            weight: AppFontWeight.bold,
+                            color: ColorConstant.darkBg,
+                          ),
+                        ),
                       ),
-                      topDatadesc(
-                        title: "Transactions",
-                        data: profileController.totalTransactions.value
-                            .toString(),
-                        iconData: Icons.note,
-                        color: ColorConstant.txtColor2nd.withAlpha(50),
-                        iconColor: ColorConstant.txtColor2nd,
+                      AppSize.h20,
+                      ProfileOptionTile(
+                        title: TextConstant.editProfile,
+                        icon: Icons.edit,
+                        subtitle: "Update your profile information",
+                        iconBackgroundColor: ColorConstant.primaryDark,
+                        iconColor: ColorConstant.white,
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.EDITPROFILE,
+                            arguments: {
+                              "name": profileController.userName.value,
+                              "email": profileController.userEmail.value,
+                              "profileImageUrl":
+                                  profileController.profileImageUrl.value,
+                            },
+                          );
+                          // Handle edit profile tap
+                        },
                       ),
-                      topDatadesc(
-                        title: "Saved",
-                        data: profileController.totalSavedAmount.value
-                            .toString(),
-                        iconData: Icons.arrow_upward,
-                        color: ColorConstant.red.withAlpha(50),
-                        iconColor: ColorConstant.red,
+                      ProfileOptionTile(
+                        title: TextConstant.changePassword,
+                        icon: Icons.lock,
+                        subtitle: "Change your account password",
+                        onTap: () {
+                          Get.toNamed(AppRoutes.CHANGEPASSWORD);
+                          // Handle change password tap
+                        },
+                        iconBackgroundColor: ColorConstant.amber,
+                        iconColor: ColorConstant.white,
+                      ),
+                      ProfileOptionTile(
+                        title: TextConstant.aboutApp,
+                        icon: Icons.info,
+                        subtitle: "Learn more about this application",
+                        iconBackgroundColor: ColorConstant.txtColor2nd,
+                        iconColor: ColorConstant.white,
+                        onTap: () {
+                          // Handle about app tap
+                        },
+                      ),
+                      ProfileOptionTile(
+                        title: TextConstant.logout,
+                        icon: Icons.logout,
+                        subtitle: "Sign out of your account",
+                        iconBackgroundColor: ColorConstant.red,
+                        iconColor: ColorConstant.white,
+
+                        onTap: () {
+                          AppLogoutDialog.show(
+                            onLogout: () async {
+                              profileController.logout();
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
-                ),
-              ),
-            ],
-          ),
-          AppSize.h20,
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(), // ⭐ CHANGED
-              padding: EdgeInsets.only(bottom: 100.h),
-              child: Padding(
-                padding: AppPadding.screen,
-                child: Column(
-                  children: [
-                    AppSize.h40,
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Account",
-                        style: AppStyles.syne(
-                          size: AppTextSize.title,
-                          weight: AppFontWeight.bold,
-                          color: ColorConstant.darkBg,
-                        ),
-                      ),
-                    ),
-                    AppSize.h20,
-                    ProfileOptionTile(
-                      title: TextConstant.editProfile,
-                      icon: Icons.edit,
-                      subtitle: "Update your profile information",
-                      iconBackgroundColor: ColorConstant.primaryDark,
-                      iconColor: ColorConstant.white,
-                      onTap: () {
-                        Get.toNamed(
-                          AppRoutes.EDITPROFILE,
-                          arguments: {
-                            "name": profileController.userName.value,
-                            "email": profileController.userEmail.value,
-                            "profileImageUrl": profileController.profileImageUrl.value,
-                          },
-                        );
-                        // Handle edit profile tap
-                      },
-                    ),
-                    ProfileOptionTile(
-                      title: TextConstant.changePassword,
-                      icon: Icons.lock,
-                      subtitle: "Change your account password",
-                      onTap: () {
-                        Get.toNamed(AppRoutes.CHANGEPASSWORD);
-                        // Handle change password tap
-                      },
-                      iconBackgroundColor: ColorConstant.amber,
-                      iconColor: ColorConstant.white,
-                    ),
-                    ProfileOptionTile(
-                      title: TextConstant.aboutApp,
-                      icon: Icons.info,
-                      subtitle: "Learn more about this application",
-                      iconBackgroundColor: ColorConstant.txtColor2nd,
-                      iconColor: ColorConstant.white,
-                      onTap: () {
-                        // Handle about app tap
-                      },
-                    ),
-                    ProfileOptionTile(
-                      title: TextConstant.logout,
-                      icon: Icons.logout,
-                      subtitle: "Sign out of your account",
-                      iconBackgroundColor: ColorConstant.red,
-                      iconColor: ColorConstant.white,
-
-                      onTap: () {
-                        AppLogoutDialog.show(
-                          onLogout: () async {
-                            profileController.logout();
-                          },
-                        );
-                      },
-                    ),
-                  ],
                 ),
               ),
             ),
-          ),
-        ],
-        ),
+          ],
+        )),
       ),
     );
   }
@@ -285,28 +290,29 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget profiledesc(String title, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          title,
-          style: AppStyles.syne(
-            size: AppTextSize.medium,
-            weight: AppFontWeight.semiBold,
-            color: ColorConstant.white,
+    return  Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: AppStyles.syne(
+              size: AppTextSize.medium,
+              weight: AppFontWeight.semiBold,
+              color: ColorConstant.white,
+            ),
           ),
-        ),
-        // AppSize.h10,
-        Text(
-          value,
-          style: AppStyles.dmSans(
-            size: AppTextSize.small,
-            weight: AppFontWeight.semiBold,
-            color: ColorConstant.white,
+          // AppSize.h10,
+          Text(
+            value,
+            style: AppStyles.dmSans(
+              size: AppTextSize.small,
+              weight: AppFontWeight.semiBold,
+              color: ColorConstant.white,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    
   }
 
   Widget topDatadesc({
