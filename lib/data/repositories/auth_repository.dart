@@ -209,6 +209,33 @@ class AuthRepository {
     return user?.email ?? 'unknown@example.com';
   }
 
+  /// Get the avatar URL saved on the user's metadata.
+  /// Returns `null` when the user has never uploaded a profile picture.
+  String? getUserAvatarUrl() {
+    final user = getCurrentUser();
+    final avatarUrl = user?.userMetadata?['avatar_url'];
+    if (avatarUrl is String && avatarUrl.isNotEmpty) return avatarUrl;
+    return null;
+  }
+
+  /// Persist the avatar URL on the user's metadata so the profile picture
+  /// survives the next app launch. Pass an empty string to clear it again
+  /// (used after the stored photo was deleted).
+  Future<void> updateAvatarUrl(String avatarUrl) async {
+    try {
+      logInfo('Saving avatar URL to user metadata');
+
+      await Supabase.instance.client.auth.updateUser(
+        UserAttributes(data: {'avatar_url': avatarUrl}),
+      );
+
+      logInfo('Avatar URL saved successfully');
+    } catch (e, st) {
+      logError('Failed to save avatar URL', error: e, st: st);
+      rethrow;
+    }
+  }
+
   /// Get user's unique ID
   String getUserId() {
     final user = getCurrentUser();

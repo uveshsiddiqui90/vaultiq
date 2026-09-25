@@ -28,6 +28,11 @@ class CustomButton extends StatelessWidget {
   // Button text/icon ka custom color
   final Color? textColor;
 
+  /// Optional corner radius for the button shell.
+  /// Expects an already scaled value (e.g. `30.r`) and falls back to the
+  /// standard 18.r rounded rectangle so every existing screen stays unchanged.
+  final double? radius;
+
   const CustomButton({
     super.key,
     required this.label,
@@ -38,6 +43,7 @@ class CustomButton extends StatelessWidget {
     this.suffixIcon,
     this.width = double.infinity,
     this.textColor,
+    this.radius,
   });
 
   // ─────────────────────────────────────────────
@@ -69,6 +75,10 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Single source of truth for the corner radius — used by both the
+    // decorated shell and the ElevatedButton nested inside it.
+    final double cornerRadius = radius ?? 18.r;
+
     return SizedBox(
       width: width,
       height: 56.h,
@@ -86,7 +96,7 @@ class CustomButton extends StatelessWidget {
                   ? Colors.transparent
                   : null,
 
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(cornerRadius),
 
           // Outline border
           border: variant == ButtonVariant.outline
@@ -116,7 +126,7 @@ class CustomButton extends StatelessWidget {
             elevation: 0,
 
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.r),
+              borderRadius: BorderRadius.circular(cornerRadius),
             ),
           ),
 

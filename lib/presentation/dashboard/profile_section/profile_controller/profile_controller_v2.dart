@@ -38,9 +38,9 @@ class ProfileControllerV2 extends GetxController {
   // LIFECYCLE
   // ──────────────────────────────────────────────────────────
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    loadProfileData();
+    await loadProfileData();
 
     // Reload this tab's data whenever the user switches back to it.
     if (Get.isRegistered<DashboardController>()) {
@@ -79,11 +79,13 @@ class ProfileControllerV2 extends GetxController {
     }
   }
 
-  /// Load user name and email from auth
+  /// Load user name, email and avatar from auth
   Future<void> _loadUserInfo() async {
     try {
       userName.value = _authRepository.getUserName();
       userEmail.value = _authRepository.getUserEmail();
+      // The avatar URL lives on the account metadata; empty = no picture.
+      profileImageUrl.value = _authRepository.getUserAvatarUrl() ?? '';
       logDebug('User info loaded: $userName / $userEmail');
     } catch (e, st) {
       logError('Failed to load user info', error: e, st: st);
@@ -153,6 +155,19 @@ class ProfileControllerV2 extends GetxController {
 
   Future<void> refreshProfile() async {
     await loadProfileData();
+  }
+
+  /// Re-read only the avatar URL.
+  ///
+  /// The Edit Profile screen calls this right after a photo was uploaded or
+  /// removed, so the profile header updates without a full reload.
+  void refreshProfileImage() {
+    try {
+      profileImageUrl.value = _authRepository.getUserAvatarUrl() ?? '';
+      logDebug('Profile image refreshed: $profileImageUrl');
+    } catch (e, st) {
+      logError('Failed to refresh the profile image', error: e, st: st);
+    }
   }
 
   // ──────────────────────────────────────────────────────────

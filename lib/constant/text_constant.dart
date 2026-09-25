@@ -45,6 +45,18 @@ class TextConstant {
   static const String enterDateHint = 'Select date';
   static const String enterNoteHint = 'Add a note about this expense';
 
+  //Transactions Screen
+  static const String recentTransactions = 'Recent Transactions';
+  static const String recentTransactionsSubtitle =
+      'Your latest spending activity';
+  static const String thisMonth = 'This Month';
+  static const String lastMonth = 'Last Month';
+  static const String allTime = 'All Time';
+  static const String selectRange = 'Select Range';
+  static const String noTransactions = 'No Transactions Found';
+  static const String dateTitle = 'Date';
+  static const String categoryTitle = 'Category';
+
   //Profile Screen
   static const String profileTitle = 'Profile Page';
   static const String editProfile = 'Edit Profile';
@@ -53,6 +65,18 @@ class TextConstant {
   static const String logout = 'Logout';
   static const String changePassword = 'Change Password';
   static const String aboutApp = 'About App';
+
+  //Edit Profile Screen
+  static const String editProfileSubtitle = 'Update your personal information';
+  static const String fullNameLabel = 'Full Name';
+  static const String emailAddressLabel = 'Email Address';
+  static const String enterFullNameHint = 'Enter your full name';
+  static const String profileSecureTitle = 'Your profile is secure';
+  static const String profileSecureDesc =
+      'This information helps us personalize your experience.';
+  static const String saveChanges = 'Save Changes';
+  static const String profileJourneyFooter =
+      'Your journey to better finances\nstarts with you';
 
 //Profile Picture Screen
   static const String profilePictureTitle = 'Add Profile Photo';
