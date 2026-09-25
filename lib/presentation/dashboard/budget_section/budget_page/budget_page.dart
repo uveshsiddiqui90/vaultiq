@@ -9,7 +9,6 @@ import 'package:vaultiq/constant/app_style/app_style.dart';
 import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
-import 'package:vaultiq/constant/widget_constant/app_bottom_nav/bottom_nav.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
 import 'package:vaultiq/presentation/dashboard/budget_section/budget_controller/budget_controller_v2.dart';
 import 'package:vaultiq/presentation/dashboard/budget_section/shimmer/budget_shimmer.dart';
@@ -17,7 +16,12 @@ import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home
 
 class BudgetPage extends StatelessWidget {
   BudgetPage({super.key});
-  final BudgetControllerV2 budgetController = Get.put(BudgetControllerV2());
+  // Reuse the controller when another screen already created it — the Home
+  // tab's "Budget Overview → Edit" action does exactly that.
+  final BudgetControllerV2 budgetController =
+      Get.isRegistered<BudgetControllerV2>()
+      ? Get.find<BudgetControllerV2>()
+      : Get.put(BudgetControllerV2());
   final HomeControllerV2 homeController = Get.find<HomeControllerV2>();
 
   @override
@@ -57,15 +61,8 @@ class BudgetPage extends StatelessWidget {
               AppSize.h40,
               CustomButton(
                 label: TextConstant.editBudget,
-                onPressed: () {
-                  AppBottomSheet.showAmountBottomSheet(
-                    context: context,
-                    controller: budgetController.budgetInputController,
-                    onSave: () async {
-                      await budgetController.updateBudgetAmount();
-                    },
-                  );
-                },
+                onPressed: () =>
+                    budgetController.showEditBudgetSheet(context),
               ),
             ],
           );

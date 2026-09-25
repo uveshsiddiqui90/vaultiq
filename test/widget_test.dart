@@ -25,6 +25,7 @@ void main() {
           AppRoutes.EDITPROFILE,
           AppRoutes.CHANGEPASSWORD,
           AppRoutes.PROFILEPICTURE,
+          AppRoutes.TRANSACTIONS,
         ]),
       );
     });

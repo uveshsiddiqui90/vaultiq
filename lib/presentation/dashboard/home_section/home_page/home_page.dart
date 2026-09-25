@@ -11,6 +11,8 @@ import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/icon_constant.dart';
 import 'package:vaultiq/presentation/dashboard/addexpense_section/addexpense_model/addexpense_model.dart';
+import 'package:vaultiq/presentation/dashboard/budget_section/budget_controller/budget_controller_v2.dart';
+import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
 import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller_v2.dart';
 import 'package:vaultiq/presentation/dashboard/home_section/shimmer/home_shimmer.dart';
 
@@ -52,7 +54,18 @@ class HomePage extends StatelessWidget {
                   children: [
                     budgetCardRecentTransactions(
                       onSecondaryTap: () {
-                        Get.toNamed(AppRoutes.ADDBUDGET);
+                        // Same flow as the Budget tab's "Edit Budget" button:
+                        // open the Budget tab and show its edit sheet.
+                        Get.find<DashboardController>().changeTab(
+                          DashboardTabs.budget,
+                        );
+
+                        final budgetController =
+                            Get.isRegistered<BudgetControllerV2>()
+                            ? Get.find<BudgetControllerV2>()
+                            : Get.put(BudgetControllerV2());
+
+                        budgetController.showEditBudgetSheet(context);
                       },
                     ),
                     AppSize.h16,
@@ -72,13 +85,7 @@ class HomePage extends StatelessWidget {
                       title: "Recent Transactions",
                       secondaryTitle: "See All",
                       onSecondaryTap: () {
-                        // Navigate to Analytics tab (index 3 in dashboard)
-                        try {
-                          final dashboardController = Get.find();
-                          dashboardController.changeTab(3);
-                        } catch (e) {
-                          Get.toNamed(AppRoutes.DASHBOARD);
-                        }
+                        Get.toNamed(AppRoutes.TRANSACTIONS);
                       },
                     ),
                     AppSize.h8,

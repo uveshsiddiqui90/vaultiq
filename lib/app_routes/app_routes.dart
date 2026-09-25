@@ -15,6 +15,7 @@ import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_bindi
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_page/dashboard_page.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/change_password/change_password_page/change_password_page.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/edit_profile/edit_profile_page/edit_profile_page.dart';
+import 'package:vaultiq/presentation/dashboard/transactions_section/transactions_page/transactions_page.dart';
 
 
 
@@ -43,7 +44,7 @@ class AppPages {
     ),
       GetPage(
         name: AppRoutes.EDITPROFILE,
-        page: () => EditProfilePage(),
+        page: () => const EditProfilePage(),
       ),
       GetPage(
         name: AppRoutes.CHANGEPASSWORD,
@@ -53,6 +54,10 @@ class AppPages {
         name: AppRoutes.PROFILEPICTURE,
         page: () => ProfilePicturePage(),
         binding: ProfilePictureBinding(),
+      ),
+      GetPage(
+        name: AppRoutes.TRANSACTIONS,
+        page: () => TransactionsPage(),
       ),
   ];
 }
@@ -67,4 +72,5 @@ class AppRoutes
     static const EDITPROFILE = '/editprofile';
     static const CHANGEPASSWORD = '/changepassword';
     static const PROFILEPICTURE = '/profilepicture';
+    static const TRANSACTIONS = '/transactions';
 }

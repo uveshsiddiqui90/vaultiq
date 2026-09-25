@@ -9,6 +9,7 @@ import 'package:vaultiq/core/services/logger_service.dart';
 import 'package:vaultiq/core/services/validation_service.dart';
 import 'package:vaultiq/data/repositories/budget_repository.dart';
 import 'package:vaultiq/data/repositories/expense_repository.dart';
+import 'package:vaultiq/constant/widget_constant/app_bottom_nav/bottom_nav.dart';
 import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_controller/dashboard_controller.dart';
 
@@ -180,6 +181,21 @@ class BudgetControllerV2 extends GetxController {
       logError('Unexpected error updating budget', error: e, st: st);
       AppSnackbar.error(message: 'Something went wrong. Please try again.');
     }
+  }
+
+  /// Opens the shared "edit monthly budget" sheet.
+  ///
+  /// Any screen (for example the Home tab's "Budget Overview → Edit" action)
+  /// can call this so the edit experience is identical to the Budget tab's
+  /// "Edit Budget" button.
+  void showEditBudgetSheet(BuildContext context) {
+    AppBottomSheet.showAmountBottomSheet(
+      context: context,
+      controller: budgetInputController,
+      onSave: () async {
+        await updateBudgetAmount();
+      },
+    );
   }
 
   // ──────────────────────────────────────────────────────────
