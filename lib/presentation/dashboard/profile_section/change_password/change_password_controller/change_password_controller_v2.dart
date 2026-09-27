@@ -27,11 +27,36 @@ class ChangePasswordControllerV2 extends GetxController {
   RxBool isLoading = false.obs;
   RxBool showPassword = false.obs;
 
+  /// Reactive mirrors of the two text fields.
+  ///
+  /// A [TextEditingController] is a plain `ValueListenable`; reading it inside
+  /// an `Obx` registers nothing, so GetX tears the widget down with
+  /// "the improper use of a GetX has been detected". The strength hint and the
+  /// "passwords do not match" hint are built inside `Obx` widgets, hence the
+  /// typed text is mirrored into Rx variables that the builders can read.
+  final RxString newPassword = ''.obs;
+  final RxString confirmPassword = ''.obs;
+
   // ──────────────────────────────────────────────────────────
   // LIFECYCLE
   // ──────────────────────────────────────────────────────────
   @override
+  void onInit() {
+    super.onInit();
+    // Keep the Rx mirrors in sync with what the user types.
+    newPasswordController.addListener(_syncNewPassword);
+    confirmPasswordController.addListener(_syncConfirmPassword);
+  }
+
+  void _syncNewPassword() => newPassword.value = newPasswordController.text;
+
+  void _syncConfirmPassword() =>
+      confirmPassword.value = confirmPasswordController.text;
+
+  @override
   void onClose() {
+    newPasswordController.removeListener(_syncNewPassword);
+    confirmPasswordController.removeListener(_syncConfirmPassword);
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.onClose();
@@ -46,17 +71,17 @@ class ChangePasswordControllerV2 extends GetxController {
   Future<void> changePassword() async {
     try {
       isLoading.value = true;
-      final newPassword = newPasswordController.text;
-      final confirmPassword = confirmPasswordController.text;
+      final pwd = newPasswordController.text;
+      final confirmation = confirmPasswordController.text;
 
       logInfo('Attempting to change password...');
 
       // ─── Validate both fields ───
-      ValidationService.validatePassword(newPassword);
-      ValidationService.validatePasswordConfirmation(newPassword, confirmPassword);
+      ValidationService.validatePassword(pwd);
+      ValidationService.validatePasswordConfirmation(pwd, confirmation);
 
       // ─── Update via auth ───
-      await _authRepository.changePassword(newPassword: newPassword);
+      await _authRepository.changePassword(newPassword: pwd);
 
       logInfo('Password changed successfully');
       AppSnackbar.success(message: 'Password changed successfully!');
@@ -89,20 +114,18 @@ class ChangePasswordControllerV2 extends GetxController {
   // ──────────────────────────────────────────────────────────
 
   bool get isFormValid {
-    return newPasswordController.text.isNotEmpty &&
-        confirmPasswordController.text.isNotEmpty;
+    return newPassword.value.isNotEmpty && confirmPassword.value.isNotEmpty;
   }
 
   bool get doPasswordsMatch {
-    if (newPasswordController.text.isEmpty ||
-        confirmPasswordController.text.isEmpty) {
+    if (newPassword.value.isEmpty || confirmPassword.value.isEmpty) {
       return true; // Don't show mismatch until both filled
     }
-    return newPasswordController.text == confirmPasswordController.text;
+    return newPassword.value == confirmPassword.value;
   }
 
   String get passwordStrengthMessage {
-    final pwd = newPasswordController.text;
+    final pwd = newPassword.value;
     if (pwd.isEmpty) return '';
     if (pwd.length < 6) return 'Too short (min 6 chars)';
     if (pwd.length < 10) return 'Weak';
