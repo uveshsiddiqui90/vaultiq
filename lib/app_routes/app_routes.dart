@@ -13,6 +13,7 @@ import 'package:vaultiq/presentation/auth/sign_up/signup_binding/signup_binding.
 import 'package:vaultiq/presentation/auth/sign_up/signup_page/signup_page.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_binding/dashboard_binding.dart';
 import 'package:vaultiq/presentation/dashboard/dashboard_section/dashboard_page/dashboard_page.dart';
+import 'package:vaultiq/presentation/dashboard/profile_section/about_app/about_app_page/about_app_page.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/change_password/change_password_page/change_password_page.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/edit_profile/edit_profile_page/edit_profile_page.dart';
 import 'package:vaultiq/presentation/dashboard/transactions_section/transactions_page/transactions_page.dart';
@@ -56,6 +57,10 @@ class AppPages {
         binding: ProfilePictureBinding(),
       ),
       GetPage(
+        name: AppRoutes.ABOUTAPP,
+        page: () => const AboutAppPage(),
+      ),
+      GetPage(
         name: AppRoutes.TRANSACTIONS,
         page: () => TransactionsPage(),
       ),
@@ -72,5 +77,6 @@ class AppRoutes
     static const EDITPROFILE = '/editprofile';
     static const CHANGEPASSWORD = '/changepassword';
     static const PROFILEPICTURE = '/profilepicture';
+    static const ABOUTAPP = '/aboutapp';
     static const TRANSACTIONS = '/transactions';
 }

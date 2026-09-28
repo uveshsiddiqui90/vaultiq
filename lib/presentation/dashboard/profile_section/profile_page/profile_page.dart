@@ -226,6 +226,7 @@ class ProfilePage extends StatelessWidget {
                           iconBackgroundColor: ColorConstant.txtColor2nd,
                           iconColor: ColorConstant.white,
                           onTap: () {
+                            Get.toNamed(AppRoutes.ABOUTAPP);
                             // Handle about app tap
                           },
                         ),
