@@ -11,6 +11,7 @@ import 'package:vaultiq/core/services/validation_service.dart';
 import 'package:vaultiq/data/repositories/auth_repository.dart';
 import 'package:vaultiq/data/services/profile_image_service/profile_image_service.dart';
 import 'package:vaultiq/presentation/dashboard/profile_section/profile_controller/profile_controller_v2.dart';
+import 'package:vaultiq/presentation/dashboard/home_section/home_controller/home_controller_v2.dart';
 import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
 
 class EditProfileControllerV2 extends GetxController {
@@ -214,12 +215,16 @@ class EditProfileControllerV2 extends GetxController {
   /// Keep the avatar in sync across the app.
   ///
   /// The dashboard's profile header renders
-  /// [ProfileControllerV2.profileImageUrl], so it is told about the new or
-  /// removed picture right away — otherwise it would keep showing the previous
-  /// avatar until the tab is reloaded.
+  /// [ProfileControllerV2.profileImageUrl] and the Home greeting renders
+  /// [HomeControllerV2.profileImageUrl], so both are told about the new or
+  /// removed picture right away — otherwise they would keep showing the
+  /// previous avatar until their tab is reloaded.
   void _syncAvatarEverywhere() {
     if (Get.isRegistered<ProfileControllerV2>()) {
       Get.find<ProfileControllerV2>().refreshProfileImage();
+    }
+    if (Get.isRegistered<HomeControllerV2>()) {
+      Get.find<HomeControllerV2>().refreshProfileImage();
     }
   }
 

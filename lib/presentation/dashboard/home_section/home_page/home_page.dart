@@ -43,6 +43,14 @@ class HomePage extends StatelessWidget {
                   remainingBudget: homeController.remainingBudget.value,
                   homeController: homeController,
                   userName: homeController.userName.value,
+                  profileImageUrl: homeController.profileImageUrl.value,
+                  onProfileTap: () {
+                    // Same flow as the bottom nav: open the Profile tab, which
+                    // is where the photo/profile can be managed.
+                    Get.find<DashboardController>().changeTab(
+                      DashboardTabs.profile,
+                    );
+                  },
                 ),
               ),
             ),
@@ -115,6 +123,8 @@ Widget topContainer(
   HomeControllerV2? homeController,
   String greeting = "Good Morning",
   String userName = "User",
+  String profileImageUrl = "",
+  VoidCallback? onProfileTap,
 }) {
   return Container(
     width: double.infinity,
@@ -131,30 +141,50 @@ Widget topContainer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "${GreetingHelper.greeting()},",
-                style: AppStyles.dmSans(
-                  size: AppTextSize.small,
-                  weight: AppFontWeight.bold,
-                  color: ColorConstant.inkMuted,
-                  //color: ColorConstant.blue,
-                ),
-              ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    userName.toString(),
-                    style: AppStyles.syne(
-                      size: AppTextSize.title,
-                      weight: AppFontWeight.extraBold,
-                      color: ColorConstant.white,
-                      //color: ColorConstant.blue,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${GreetingHelper.greeting()},",
+                          style: AppStyles.dmSans(
+                            size: AppTextSize.small,
+                            weight: AppFontWeight.bold,
+                            color: ColorConstant.inkMuted,
+                            //color: ColorConstant.blue,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                userName.toString(),
+                                overflow: TextOverflow.ellipsis,
+                                style: AppStyles.syne(
+                                  size: AppTextSize.title,
+                                  weight: AppFontWeight.extraBold,
+                                  color: ColorConstant.white,
+                                  //color: ColorConstant.blue,
+                                ),
+                              ),
+                            ),
+                            Image.asset(
+                              IconConstant.wavingHand,
+                              height: AppAssetSize.large,
+                              width: AppAssetSize.large,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Image.asset(
-                    IconConstant.wavingHand,
-                    height: AppAssetSize.large,
-                    width: AppAssetSize.large,
+                  AppSize.w12,
+                  homeProfileAvatar(
+                    imageUrl: profileImageUrl,
+                    onTap: onProfileTap,
                   ),
                 ],
               ),
@@ -234,6 +264,75 @@ Widget topContainer(
           ),
         ),
       ],
+    ),
+  );
+}
+
+/// Circular profile picture shown on the right of the home greeting.
+///
+/// Preview priority:
+///  1. the avatar saved on the user's account ([imageUrl])
+///  2. a neutral person icon when there is none, or when the stored object can
+///     no longer be loaded
+///
+/// Tapping it hands over to [onTap] (the Profile tab), which is where the photo
+/// can be changed.
+Widget homeProfileAvatar({required String imageUrl, VoidCallback? onTap}) {
+  final bool hasImage = imageUrl.trim().isNotEmpty;
+  final double size = 54.w;
+
+  return GestureDetector(
+    onTap: onTap,
+    // `opaque` so a tap anywhere on the circle counts, not only on the picture.
+    behavior: HitTestBehavior.opaque,
+    child: Container(
+      width: size,
+      height: size,
+      padding: EdgeInsets.all(2.5.w),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        // Brand ring instead of a plain border so the avatar still reads as a
+        // button on the dark header.
+        gradient: ColorConstant.primaryGradient,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.28),
+            blurRadius: 16,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: ColorConstant.darkBg2,
+        ),
+        child: ClipOval(
+          child: hasImage
+              ? Image.network(
+                  imageUrl,
+                  width: size,
+                  height: size,
+                  fit: BoxFit.cover,
+                  // Storage object missing / expired → keep the ring intact
+                  // instead of showing a red error box.
+                  errorBuilder: (context, error, stackTrace) =>
+                      _avatarPlaceholder(),
+                )
+              : _avatarPlaceholder(),
+        ),
+      ),
+    ),
+  );
+}
+
+/// Neutral avatar shown when no photo is available yet.
+Widget _avatarPlaceholder() {
+  return Center(
+    child: Icon(
+      Icons.person_rounded,
+      size: 28.sp,
+      color: ColorConstant.inkMuted,
     ),
   );
 }

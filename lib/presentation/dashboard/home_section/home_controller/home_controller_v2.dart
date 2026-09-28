@@ -33,6 +33,7 @@ class HomeControllerV2 extends GetxController {
   RxDouble totalExpense = 0.0.obs;
   RxDouble remainingBudget = 0.0.obs;
   RxString userName = 'User'.obs;
+  RxString profileImageUrl = ''.obs;
 
   // ──────────────────────────────────────────────────────────
   // COMPUTED PROPERTIES
@@ -116,11 +117,16 @@ class HomeControllerV2 extends GetxController {
     try {
       final name = _authRepository.getUserName();
       userName.value = name;
+
+      // The avatar URL lives on the account metadata; empty = no picture yet.
+      profileImageUrl.value = _authRepository.getUserAvatarUrl() ?? '';
+
       logDebug('User name: $name');
     } catch (e) {
       logWarn('Could not fetch user name');
       logDebug('Error: $e');
       userName.value = 'User'; // Fallback
+      profileImageUrl.value = '';
     }
   }
 
@@ -199,6 +205,19 @@ class HomeControllerV2 extends GetxController {
   /// Refresh all home data (used in pull-to-refresh)
   Future<void> refreshHomeData() async {
     await loadHomeData();
+  }
+
+  /// Re-read only the avatar URL.
+  ///
+  /// The greeting avatar is refreshed whenever this tab regains focus; this is
+  /// the lightweight hook for a photo change that happens elsewhere.
+  void refreshProfileImage() {
+    try {
+      profileImageUrl.value = _authRepository.getUserAvatarUrl() ?? '';
+      logDebug('Profile image refreshed: $profileImageUrl');
+    } catch (e, st) {
+      logError('Failed to refresh the profile image', error: e, st: st);
+    }
   }
 
   // ──────────────────────────────────────────────────────────
