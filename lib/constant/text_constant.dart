@@ -66,6 +66,87 @@ class TextConstant {
   static const String changePassword = 'Change Password';
   static const String aboutApp = 'About App';
 
+  //Change Password Screen
+  static const String changePasswordSubtitle = 'Keep your account secure';
+  static const String currentPasswordLabel = 'Current Password';
+  static const String currentPasswordHint = 'Enter your current password';
+  static const String newPasswordLabel = 'New Password';
+  static const String newPasswordHint = 'Enter new password';
+  static const String confirmNewPasswordHint = 'Confirm new password';
+  static const String passwordStrength = 'Password strength';
+  static const String passwordsDoNotMatch = 'Passwords do not match';
+  static const String updatePassword = 'Update Password';
+  static const String passwordSecureTitle = 'Keep Your Account Safe';
+  static const String passwordSecureDesc =
+      'Use a strong password with a mix of letters, numbers and symbols.';
+
+  //About App Screen
+  static const String aboutAppSubtitle = 'Simple. Smart. Secure.';
+  static const String aboutAppTagline = 'Your money, your control.';
+  static const String aboutAppNameTagline =
+      'Smarter Spending. Brighter Future.';
+  static const String aboutAppDescription =
+      'VaultIQ is your personal finance companion, designed to help you track '
+      'expenses, set budgets and build better money habits. Take control of '
+      'your finances, one step at a time.';
+  static const String aboutWhatYouCanDo = 'What you can do';
+  static const String aboutVersionPrefix = 'Version';
+  static const String aboutFooterTitle =
+      'Built with \u2764\ufe0f for a better financial you';
+  static const String aboutFooterDesc = 'Thank you for choosing VaultIQ!';
+
+  //About App Screen → feature tiles (tile copy is the short summary, the
+  //bottom sheet shows the longer description and the bullet points)
+  static const String aboutTrackExpenses = 'Track Expenses';
+  static const String aboutTrackExpensesSummary =
+      'Keep a record of all your transactions in one place.';
+  static const String aboutTrackExpensesDetails =
+      'Every entry you add is stored with its amount, category, date and note, '
+      'so the whole month is always one glance away on the Home and '
+      'Transactions tabs.';
+  static const List<String> aboutTrackExpensesPoints = [
+    'Amount, category, date and note on every entry',
+    'Full history with search from the Transactions tab',
+    'Monthly totals refresh the moment you add an expense',
+  ];
+
+  static const String aboutSetBudgets = 'Set Budgets';
+  static const String aboutSetBudgetsSummary =
+      'Plan your monthly budget and stay on track.';
+  static const String aboutSetBudgetsDetails =
+      'Set one monthly budget and VaultIQ measures every expense against it, so '
+      'you always know how much room is left before the month ends.';
+  static const List<String> aboutSetBudgetsPoints = [
+    'Set or edit your monthly budget in a few taps',
+    'A usage bar shows exactly how much is already spent',
+    'Remaining amount is recalculated after every expense',
+  ];
+
+  static const String aboutGetInsights = 'Get Insights';
+  static const String aboutGetInsightsSummary =
+      'Understand your spending habits with easy-to-read analytics.';
+  static const String aboutGetInsightsDetails =
+      'The Analytics tab turns raw transactions into simple charts, so you can '
+      'see which categories take the biggest share of your money and where you '
+      'can save more.';
+  static const List<String> aboutGetInsightsPoints = [
+    'Category-wise breakdown of your spending',
+    'Month-on-month trend of your expenses',
+    'Charts that update automatically with your data',
+  ];
+
+  static const String aboutDataPriority = 'Your Data, Our Priority';
+  static const String aboutDataPrioritySummary =
+      'Industry-standard security keeps your data safe and private.';
+  static const String aboutDataPriorityDetails =
+      'Your account lives behind an authenticated, password-protected backend '
+      'and VaultIQ only ever stores the information it needs to work.';
+  static const List<String> aboutDataPriorityPoints = [
+    'Password-protected, authenticated sessions',
+    'Only your name, email and expenses are stored',
+    'Edit or remove your details any time from the Profile tab',
+  ];
+
   //Edit Profile Screen
   static const String editProfileSubtitle = 'Update your personal information';
   static const String fullNameLabel = 'Full Name';

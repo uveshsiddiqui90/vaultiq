@@ -67,8 +67,10 @@ void main() {
         reason: 'Every Obx on this page must read an observable',
       );
 
-      expect(find.text('New Password'), findsOneWidget);
-      expect(find.text('Confirm Password'), findsOneWidget);
+      // CustomTextField prints its label in upper case.
+      expect(find.text('CURRENT PASSWORD'), findsOneWidget);
+      expect(find.text('NEW PASSWORD'), findsOneWidget);
+      expect(find.text('CONFIRM PASSWORD'), findsOneWidget);
     });
 
     testWidgets('strength and mismatch hints follow the typed text', (
@@ -76,8 +78,9 @@ void main() {
     ) async {
       await tester.pumpWidget(buildPage());
 
-      final passwordField = find.byType(TextField).at(0);
-      final confirmField = find.byType(TextField).at(1);
+      // Field order on the page: current (0), new (1), confirm (2).
+      final passwordField = find.byType(TextField).at(1);
+      final confirmField = find.byType(TextField).at(2);
 
       // Too short
       await tester.enterText(passwordField, 'abc');
@@ -95,6 +98,25 @@ void main() {
       await tester.enterText(confirmField, 'Different1!');
       await tester.pump();
       expect(find.text('Passwords do not match'), findsOneWidget);
+    });
+
+    testWidgets('an empty current password is rejected without any request', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildPage());
+
+      await tester.ensureVisible(find.text('Update Password'));
+      await tester.tap(find.text('Update Password'));
+      // Let the change flow reach its local validation and show the snackbar.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(find.text('Please enter your current password.'), findsOneWidget);
+
+      // Take the snackbar down again: this cancels its 3 s auto-close timer and
+      // disposes its animation, so the test leaves nothing pending behind.
+      Get.closeAllSnackbars();
+      await tester.pumpAndSettle();
     });
   });
 }

@@ -159,6 +159,30 @@ class AuthRepository {
     }
   }
 
+  /// Check that [password] really is the signed-in user's password.
+  ///
+  /// Re-authenticates the current account (same user, so the session that is
+  /// returned replaces the existing one) and reports the result as a bool, so
+  /// the screen can show "wrong password" instead of a generic failure.
+  /// Anything that is not an auth failure — no session, network problems —
+  /// is rethrown so it is never mistaken for a wrong password.
+  Future<bool> verifyPassword({required String password}) async {
+    final email = getCurrentUser()?.email;
+    if (email == null) throw SessionExpiredException();
+
+    try {
+      logInfo('Verifying current password');
+
+      await _authService.login(email, password);
+
+      logInfo('Current password verified');
+      return true;
+    } on AuthException catch (e, st) {
+      logError('Password verification failed', error: e, st: st);
+      return false;
+    }
+  }
+
   /// Change user password
   /// Requires: Current user must be logged in
   Future<void> changePassword({required String newPassword}) async {

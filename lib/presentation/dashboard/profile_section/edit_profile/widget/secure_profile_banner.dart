@@ -5,11 +5,24 @@ import 'package:vaultiq/constant/app_style/app_style.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
 
-/// Light-green reassurance card shown under the profile fields.
+/// Light-green reassurance card: green shield + title + one line of copy,
+/// exactly like the design mock-up.
 ///
-/// Green shield + title + one line of copy, exactly like the design mock-up.
+/// Reused by every screen that needs the same reassurance block — Edit Profile
+/// keeps the profile wording, the Change Password screen passes its own
+/// password-focused copy through [title] and [description].
 class SecureProfileBanner extends StatelessWidget {
-  const SecureProfileBanner({super.key});
+  /// Bold headline of the card.
+  final String title;
+
+  /// Supporting copy under [title].
+  final String description;
+
+  const SecureProfileBanner({
+    super.key,
+    this.title = TextConstant.profileSecureTitle,
+    this.description = TextConstant.profileSecureDesc,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +43,7 @@ class SecureProfileBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  TextConstant.profileSecureTitle,
+                  title,
                   style: AppStyles.dmSans(
                     size: 13.sp,
                     weight: AppFontWeight.bold,
@@ -39,7 +52,7 @@ class SecureProfileBanner extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  TextConstant.profileSecureDesc,
+                  description,
                   style: AppStyles.dmSans(
                     size: 11.5.sp,
                     weight: AppFontWeight.regular,
