@@ -9,7 +9,6 @@ import 'package:vaultiq/constant/app_textsize/app_textsize.dart';
 import 'package:vaultiq/constant/color_constant.dart';
 import 'package:vaultiq/constant/icon_constant.dart';
 import 'package:vaultiq/constant/text_constant.dart';
-import 'package:vaultiq/constant/widget_constant/app_snackbar.dart';
 import 'package:vaultiq/constant/widget_constant/auth_footer_txt.dart';
 import 'package:vaultiq/constant/widget_constant/custom_button.dart';
 import 'package:vaultiq/constant/widget_constant/custom_textfield.dart';
@@ -25,7 +24,7 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Padding(
         padding: AppPadding.screen,
         child: SingleChildScrollView(
@@ -42,7 +41,7 @@ class SignupPage extends StatelessWidget {
                   style: AppStyles.syne(
                     size: AppTextSize.extraLarge,
                     weight: AppFontWeight.bold,
-                    color: ColorConstant.txtColor,
+                    color: ColorConstant.inkDark,
                   ),
                 ),
                 Text(
@@ -50,27 +49,27 @@ class SignupPage extends StatelessWidget {
                   style: AppStyles.dmSans(
                     size: AppTextSize.medium,
                     weight: AppFontWeight.regular,
-                    color: ColorConstant.txtColor,
+                    color: ColorConstant.inkMuted,
                   ),
                 ),
                 AppSize.h40,
                 CustomTextField(
                   label: TextConstant.nameLabel,
                   hint: TextConstant.nameHint,
-                  controller: signUpController.nameController.value,
+                  controller: signUpController.nameController,
                 ),
                 AppSize.h20,
                 CustomTextField(
                   label: TextConstant.emailSignUpLabel,
                   hint: TextConstant.emailSignUpHint,
-                  controller: signUpController.emailController.value,
+                  controller: signUpController.emailController,
                 ),
                 SizedBox(height: 20),
                 Obx(
                   () => CustomTextField(
                     label: TextConstant.passwordLabel,
                     hint: TextConstant.passwordHint,
-                    controller: signUpController.passwordController.value,
+                    controller: signUpController.passwordController,
                     isPassword: true,
                     isPasswordVisible: signUpController.isPasswordVisible.value,
                     onTogglePassword: () =>
@@ -83,7 +82,7 @@ class SignupPage extends StatelessWidget {
                   () => CustomTextField(
                     label: TextConstant.confirmPasswordLabel,
                     hint: TextConstant.confirmPasswordHint,
-                    controller: signUpController.confirmPasswordController.value,
+                    controller: signUpController.confirmPasswordController,
                     isPassword: true,
                     isPasswordVisible:
                         signUpController.isConfirmPasswordVisible.value,
@@ -93,47 +92,17 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
                 AppSize.h40,
-                CustomButton(
-                  label: TextConstant.createAccount,
-                  onPressed: () {
-                    if (!signUpController.formKey.currentState!.validate()) {
-                      return;
-                    }
-
-                    if (signUpController.nameController.value.text
-                        .trim()
-                        .isEmpty) {
-                      AppSnackbar.error(message: TextConstant.nameEmptyError);
-                      return;
-                    }
-            
-                    if (signUpController.emailController.value.text
-                            .trim()
-                            .isEmpty ||
-                        signUpController.passwordController.value.text
-                            .trim()
-                            .isEmpty ||
-                        signUpController.confirmPasswordController.value.text
-                            .trim()
-                            .isEmpty) {
-                      AppSnackbar.error(
-                        message: TextConstant.emailPasswordRequired,
-                      );
-                      return;
-                    }
-            
-                    signUpController.userSignUp(
-                      name: signUpController.nameController.value.text.trim(),
-                      email: signUpController.emailController.value.text.trim(),
-                      password: signUpController.passwordController.value.text
-                          .trim(),
-                      confirmPassword: signUpController
-                          .confirmPasswordController
-                          .value
-                          .text
-                          .trim(),
-                    );
-                  },
+                // `Obx` so the button swaps its label for a spinner (and stops
+                // accepting taps) while the account is being created.
+                Obx(
+                  () => CustomButton(
+                    label: TextConstant.createAccount,
+                    isLoading: signUpController.isLoading.value,
+                    onPressed: () {
+                      signUpController.formKey.currentState?.validate();
+                      signUpController.userSignUp();
+                    },
+                  ),
                 ),
                 AppSize.h20,
                 Center(

@@ -45,5 +45,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Required by image_picker / permission_handler: opening the camera
+	     without NSCameraUsageDescription aborts the app on iOS, and picking
+	     from the gallery without NSPhotoLibraryUsageDescription does the same. -->
+	<key>NSCameraUsageDescription</key>
+	<string>VaultIQ needs access to your camera so you can take a profile picture.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>VaultIQ needs access to your photo library so you can choose a profile picture.</string>
 </dict>
 </plist>

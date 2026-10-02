@@ -84,19 +84,19 @@ class LoginPage extends StatelessWidget {
                             !loginController.isPasswordVisible.value,
                   ),
                 ),
-                AppSize.h20,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    TextConstant.forgotPassword,
-                    style: AppStyles.dmSans(
-                      size: AppTextSize.body,
-                      weight: AppFontWeight.medium,
-                      color: ColorConstant.blue,
-                    ),
-                  ),
-                ),
-                AppSize.h20,
+                // AppSize.h20,
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: Text(
+                //     TextConstant.forgotPassword,
+                //     style: AppStyles.dmSans(
+                //       size: AppTextSize.body,
+                //       weight: AppFontWeight.medium,
+                //       color: ColorConstant.blue,
+                //     ),
+                //   ),
+                // ),
+                AppSize.h40,
                 Obx(
                   () => CustomButton(
                     label: TextConstant.login,

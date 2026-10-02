@@ -7,6 +7,11 @@ import 'package:vaultiq/presentation/auth/profile_picture/profile_picture_contro
 class ProfilePictureBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ProfilePictureController>( () => ProfilePictureController(),);
+    // Recreated on every visit — the picked file and the upload flag must not
+    // survive into a later onboarding attempt.
+    Get.lazyPut<ProfilePictureController>(
+      () => ProfilePictureController(),
+      fenix: true,
+    );
   }
 }

@@ -169,6 +169,28 @@ class TextConstant {
   static const String continueButton = 'Continue';
   static const String skipButton = 'Skip';
 
+  //Set Budget Screen (last onboarding step)
+  static const String vaultWordmark = 'Vault';
+  static const String iqWordmark = 'IQ';
+  static const String setBudgetTitle = 'Set Your\nMonthly Budget';
+  static const String setBudgetSubtitle =
+      'Plan your expenses, stay in control and achieve your financial goals.';
+  static const String setBudgetCardDesc =
+      'Enter the amount you want to spend this month.\n'
+      'You can always change it later.';
+  static const String budgetAmountHint = '0';
+  static const String quickTipTitle = 'Quick Tip';
+  static const String quickTipDesc =
+      'Choose a realistic budget based on your income and spending habits.';
+  static const String saveBudget = 'Save Budget';
+  static const String allSet = "You're all set! 🎉";
+  static const String allSetDesc = "Let's get you to your home screen.";
+  static const String budgetEmptyError = 'Please enter your monthly budget';
+  static const String budgetInvalidError = 'Please enter a valid amount';
+  static const String budgetSaved = 'Monthly budget set successfully!';
+  static const String budgetSaveFailed =
+      'Could not save your budget. Please try again.';
+
   //error messages
   static const String error = 'Error';
   static const String invalidCredentials = 'Incorrect email or password';
@@ -180,4 +202,13 @@ class TextConstant {
   static const String userNotFoundError = 'User not found';
   static const String somethingWentWrong = 'Something went wrong';
   static const String loginFailed = 'Login Failed';
+  static const String passwordMismatchError = 'Passwords do not match';
+  static const String passwordTooShortError =
+      'Password must be at least 6 characters';
+  static const String accountAlreadyExists =
+      'Account already exists. Please login instead.';
+  static const String signupFailed = 'Sign up failed. Please try again.';
+  static const String signupVerifyEmail =
+      'Account created! Please verify your email, then login.';
+  static const String signupSuccess = 'Account created successfully!';
 }
