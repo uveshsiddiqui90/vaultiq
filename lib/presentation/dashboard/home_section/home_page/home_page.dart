@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Obx(() {
         if (homeController.isLoading.value) {
           return const HomeShimmer();
@@ -32,26 +32,25 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Obx(
-              () => GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.PROFILEPICTURE);
+              // Only the avatar inside the card is tappable. The whole header
+              // used to be wrapped in a `GestureDetector` that pushed the
+              // signup-time profile-picture screen, so any stray tap on the
+              // greeting/balance card yanked the user back into onboarding.
+              () => topContainer(
+                context,
+                monthlyBudget: homeController.monthlyBudget.value,
+                totalExpense: homeController.totalExpense.value,
+                remainingBudget: homeController.remainingBudget.value,
+                homeController: homeController,
+                userName: homeController.userName.value,
+                profileImageUrl: homeController.profileImageUrl.value,
+                onProfileTap: () {
+                  // Same flow as the bottom nav: open the Profile tab, which is
+                  // where the photo/profile can be managed.
+                  Get.find<DashboardController>().changeTab(
+                    DashboardTabs.profile,
+                  );
                 },
-                child: topContainer(
-                  context,
-                  monthlyBudget: homeController.monthlyBudget.value,
-                  totalExpense: homeController.totalExpense.value,
-                  remainingBudget: homeController.remainingBudget.value,
-                  homeController: homeController,
-                  userName: homeController.userName.value,
-                  profileImageUrl: homeController.profileImageUrl.value,
-                  onProfileTap: () {
-                    // Same flow as the bottom nav: open the Profile tab, which
-                    // is where the photo/profile can be managed.
-                    Get.find<DashboardController>().changeTab(
-                      DashboardTabs.profile,
-                    );
-                  },
-                ),
               ),
             ),
             AppSize.h16,
@@ -130,7 +129,7 @@ Widget topContainer(
     width: double.infinity,
     // height: AppSize.height(context, 0.5),
     decoration: BoxDecoration(
-      gradient: LinearGradient(colors: [Color(0xFF0D1025), Color(0xFF161A38)]),
+      gradient: ColorConstant.darkGradient,
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,10 +150,9 @@ Widget topContainer(
                         Text(
                           "${GreetingHelper.greeting()},",
                           style: AppStyles.dmSans(
-                            size: AppTextSize.small,
+                            size: 15.sp,
                             weight: AppFontWeight.bold,
                             color: ColorConstant.inkMuted,
-                            //color: ColorConstant.blue,
                           ),
                         ),
                         Row(
@@ -194,10 +192,10 @@ Widget topContainer(
                 width: double.infinity,
                 // height: AppSize.height(context, 0.3),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF).withValues(alpha: 0.08),
+                  color: ColorConstant.white.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(22.r),
                   border: Border.all(
-                    color: Colors.white.withAlpha(100),
+                    color: ColorConstant.white.withValues(alpha: 0.4),
                     width: 1,
                   ),
                 ),
@@ -345,7 +343,7 @@ Widget thisMonthCard(
 ) {
   return Container(
     decoration: BoxDecoration(
-      color: Color(0xFFFFFFFF).withValues(alpha: 0.08),
+      color: ColorConstant.white.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(12.r),
     ),
     child: Padding(
@@ -361,7 +359,7 @@ Widget thisMonthCard(
               style: AppStyles.dmSans(
                 size: AppTextSize.small,
                 weight: AppFontWeight.bold,
-                color: ColorConstant.hinttxtColor,
+                color: ColorConstant.white.withValues(alpha: 0.72),
               ),
             ),
           ),
@@ -394,7 +392,7 @@ Widget budgetCardRecentTransactions({
           style: AppStyles.syne(
             size: AppTextSize.body,
             weight: AppFontWeight.extraBold,
-            color: ColorConstant.txtColor,
+            color: ColorConstant.inkDark,
           ),
         ),
         Row(
@@ -442,7 +440,7 @@ Widget amountUsedCard(
                     style: AppStyles.syne(
                       size: AppTextSize.small,
                       weight: AppFontWeight.extraBold,
-                      color: ColorConstant.txtColor,
+                      color: ColorConstant.inkDark,
                     ),
                   ),
                   Text(
@@ -450,7 +448,7 @@ Widget amountUsedCard(
                     style: AppStyles.syne(
                       size: AppTextSize.small,
                       weight: AppFontWeight.extraBold,
-                      color: ColorConstant.txtColor,
+                      color: ColorConstant.inkDark,
                     ),
                   ),
                   Text(
@@ -458,7 +456,7 @@ Widget amountUsedCard(
                     style: AppStyles.syne(
                       size: AppTextSize.small,
                       weight: AppFontWeight.extraBold,
-                      color: ColorConstant.txtColor,
+                      color: ColorConstant.inkDark,
                     ),
                   ),
                 ],
@@ -501,7 +499,7 @@ Widget amountUsedCard(
                 style: AppStyles.dmSans(
                   size: AppTextSize.small,
                   weight: AppFontWeight.medium,
-                  color: ColorConstant.hinttxtColor,
+                  color: ColorConstant.inkMuted,
                 ),
               ),
 
@@ -510,7 +508,7 @@ Widget amountUsedCard(
                 style: AppStyles.dmSans(
                   size: AppTextSize.small,
                   weight: AppFontWeight.medium,
-                  color: ColorConstant.hinttxtColor,
+                  color: ColorConstant.inkMuted,
                 ),
               ),
             ],
@@ -543,7 +541,7 @@ Widget reecentTransactionList({
           child: ListTile(
             leading: Container(
               decoration: BoxDecoration(
-                color: ColorConstant.borderColor,
+                color: ColorConstant.border,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Padding(
@@ -557,7 +555,7 @@ Widget reecentTransactionList({
               style: AppStyles.syne(
                 size: AppTextSize.body,
                 weight: AppFontWeight.bold,
-                color: ColorConstant.txtColor,
+                color: ColorConstant.inkDark,
               ),
             ),
             subtitle: Text(
@@ -566,7 +564,7 @@ Widget reecentTransactionList({
               style: AppStyles.dmSans(
                 size: AppTextSize.small,
                 weight: AppFontWeight.medium,
-                color: ColorConstant.hinttxtColor,
+                color: ColorConstant.inkMuted,
               ),
             ),
             trailing: Text(
@@ -600,7 +598,7 @@ Widget recentTransactionList({
           style: AppStyles.dmSans(
             size: AppTextSize.body,
             weight: AppFontWeight.medium,
-            color: ColorConstant.hinttxtColor,
+            color: ColorConstant.inkMuted,
           ),
         ),
       ),
@@ -628,7 +626,7 @@ Widget recentTransactionList({
             leading: Container(
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                color: ColorConstant.borderColor,
+                color: ColorConstant.border,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Icon(
@@ -643,7 +641,7 @@ Widget recentTransactionList({
               style: AppStyles.syne(
                 size: AppTextSize.body,
                 weight: AppFontWeight.bold,
-                color: ColorConstant.txtColor,
+                color: ColorConstant.inkDark,
               ),
             ),
 
@@ -652,7 +650,7 @@ Widget recentTransactionList({
               style: AppStyles.dmSans(
                 size: AppTextSize.small,
                 weight: AppFontWeight.medium,
-                color: ColorConstant.hinttxtColor,
+                color: ColorConstant.inkMuted,
               ),
             ),
 

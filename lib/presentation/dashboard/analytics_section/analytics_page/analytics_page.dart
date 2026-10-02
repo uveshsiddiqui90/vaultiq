@@ -22,7 +22,7 @@ class AnalyticsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: SafeArea(
         child: Obx(() {
           if (analyticsController.isLoading.value) {
@@ -106,7 +106,7 @@ class AnalyticsPage extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(11.w),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorConstant.white,
               borderRadius: BorderRadius.circular(12.r),
               border: Border.all(color: ColorConstant.border),
             ),
@@ -129,7 +129,7 @@ class AnalyticsPage extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorConstant.white,
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(color: ColorConstant.border),
         ),
@@ -170,7 +170,7 @@ class AnalyticsPage extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(20.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
           ),
           child: Column(
@@ -182,7 +182,7 @@ class AnalyticsPage extends StatelessWidget {
                   width: 45.w,
                   height: 5.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: ColorConstant.border,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -221,7 +221,7 @@ class AnalyticsPage extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: isSelected ? ColorConstant.focusedFieldBg : ColorConstant.bgLight,
+          color: isSelected ? ColorConstant.primaryLight : ColorConstant.bgLight,
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
             color: isSelected ? ColorConstant.primary : Colors.transparent,
@@ -282,7 +282,7 @@ class AnalyticsPage extends StatelessWidget {
             child: Icon(
               Icons.account_balance_wallet_rounded,
               size: 90.sp,
-              color: Colors.white.withValues(alpha: 0.15),
+              color: ColorConstant.white.withValues(alpha: 0.15),
             ),
           ),
           Column(
@@ -293,7 +293,7 @@ class AnalyticsPage extends StatelessWidget {
                 style: AppStyles.dmSans(
                   size: AppTextSize.body,
                   weight: AppFontWeight.semiBold,
-                  color: Colors.white.withValues(alpha: 0.85),
+                  color: ColorConstant.white.withValues(alpha: 0.85),
                 ),
               ),
               AppSize.h8,
@@ -303,7 +303,7 @@ class AnalyticsPage extends StatelessWidget {
                   style: AppStyles.syne(
                     size: AppTextSize.extraLarge,
                     weight: AppFontWeight.extraBold,
-                    color: Colors.white,
+                    color: ColorConstant.white,
                   ),
                 ),
               ),
@@ -322,8 +322,8 @@ class AnalyticsPage extends StatelessWidget {
                           : Icons.arrow_downward_rounded,
                       size: 16.sp,
                       color: isIncrease
-                          ? const Color(0xFFFFB4B4)
-                          : const Color(0xFFC8FFE0),
+                          ? ColorConstant.redLight
+                          : ColorConstant.primaryLight,
                     ),
                     Text(
                       " ${change.abs().toStringAsFixed(0)}%",
@@ -331,8 +331,8 @@ class AnalyticsPage extends StatelessWidget {
                         size: AppTextSize.small,
                         weight: AppFontWeight.bold,
                         color: isIncrease
-                            ? const Color(0xFFFFB4B4)
-                            : const Color(0xFFC8FFE0),
+                            ? ColorConstant.redLight
+                            : ColorConstant.primaryLight,
                       ),
                     ),
                     Text(
@@ -340,7 +340,7 @@ class AnalyticsPage extends StatelessWidget {
                       style: AppStyles.dmSans(
                         size: AppTextSize.small,
                         weight: AppFontWeight.medium,
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: ColorConstant.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ],
@@ -359,7 +359,7 @@ class AnalyticsPage extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: ColorConstant.border),
       ),
@@ -557,7 +557,7 @@ class AnalyticsPage extends StatelessWidget {
             return Container(
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: ColorConstant.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
               ),
               child: Column(
@@ -568,7 +568,7 @@ class AnalyticsPage extends StatelessWidget {
                       width: 45.w,
                       height: 5.h,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: ColorConstant.border,
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
@@ -611,7 +611,7 @@ class AnalyticsPage extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: ColorConstant.border),
       ),
@@ -665,7 +665,7 @@ class AnalyticsPage extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                   decoration: BoxDecoration(
-                    color: ColorConstant.focusedFieldBg,
+                    color: ColorConstant.primaryLight,
                     borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Row(
@@ -860,7 +860,7 @@ class AnalyticsPage extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.circular(20.r),
             border: Border.all(color: ColorConstant.border),
           ),

@@ -29,13 +29,13 @@ class CustomDateField extends StatelessWidget {
         data: Theme.of(context).copyWith(
           colorScheme: ColorScheme.dark(
             primary: ColorConstant.primary,          // Selected date & header
-            onPrimary: Colors.white,                 // Header text
-            surface: const Color(0xFF1B203A),        // Calendar background
-            onSurface: Colors.white,                 // Calendar numbers
+            onPrimary: ColorConstant.white,                 // Header text
+            surface: ColorConstant.darkBg2,        // Calendar background
+            onSurface: ColorConstant.white,                 // Calendar numbers
           ),
 
           dialogTheme: DialogThemeData(
-            backgroundColor: const Color(0xFF1B203A),
+            backgroundColor: ColorConstant.darkBg2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -93,21 +93,21 @@ class CustomDateField extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
-                    color: Color(0xFFD9D9D9),
+                    color: ColorConstant.border,
                     width: 1.2,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
-                    color: Color(0xFFD9D9D9),
+                    color: ColorConstant.border,
                     width: 1.2,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16.r),
                   borderSide: const BorderSide(
-                    color: Color(0xFFD9D9D9),
+                    color: ColorConstant.border,
                     width: 1.2,
                   ),
                 ),

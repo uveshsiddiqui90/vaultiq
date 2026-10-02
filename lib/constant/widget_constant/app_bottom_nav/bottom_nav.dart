@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vaultiq/constant/color_constant.dart';
 
 class AppBottomSheet {
   static Future<void> showAmountBottomSheet({
@@ -26,7 +27,7 @@ class AppBottomSheet {
               child: Container(
                 padding: EdgeInsets.all(24.w),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30.r),
                   ),
@@ -41,7 +42,7 @@ class AppBottomSheet {
                         width: 45.w,
                         height: 5.h,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
+                          color: ColorConstant.border,
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
@@ -56,6 +57,7 @@ class AppBottomSheet {
                         fontSize: 30.sp,
                         fontWeight: FontWeight.w800,
                         height: 1.1,
+                        color: ColorConstant.inkDark,
                       ),
                     ),
 
@@ -64,7 +66,7 @@ class AppBottomSheet {
                     /// Subtitle
                     Text(
                       subtitle,
-                      style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                      style: TextStyle(color: ColorConstant.inkMuted, fontSize: 14.sp),
                     ),
 
                     SizedBox(height: 22.h),
@@ -73,10 +75,10 @@ class AppBottomSheet {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 18.w),
                       decoration: BoxDecoration(
-                        color: const Color(0xffF4F5FA),
+                        color: ColorConstant.bgLight,
                         borderRadius: BorderRadius.circular(20.r),
                         border: Border.all(
-                          color: const Color(0xff00C896),
+                          color: ColorConstant.primary,
                           width: 2,
                         ),
                       ),
@@ -86,6 +88,7 @@ class AppBottomSheet {
                         style: TextStyle(
                           fontSize: 30.sp,
                           fontWeight: FontWeight.bold,
+                          color: ColorConstant.inkDark,
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -93,7 +96,7 @@ class AppBottomSheet {
                           prefixStyle: TextStyle(
                             fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey.shade700,
+                            color: ColorConstant.inkMid,
                           ),
                         ),
                       ),
@@ -120,12 +123,12 @@ class AppBottomSheet {
                             ),
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? const Color(0xffE7FFF7)
-                                  : const Color(0xffF4F5FA),
+                                  ? ColorConstant.primaryLight
+                                  : ColorConstant.bgLight,
                               borderRadius: BorderRadius.circular(14.r),
                               border: Border.all(
                                 color: isSelected
-                                    ? const Color(0xff00C896)
+                                    ? ColorConstant.primary
                                     : Colors.transparent,
                               ),
                             ),
@@ -134,6 +137,7 @@ class AppBottomSheet {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 15.sp,
+                                color: ColorConstant.inkDark,
                               ),
                             ),
                           ),
@@ -152,7 +156,7 @@ class AppBottomSheet {
                             child: OutlinedButton(
                               onPressed: () => Navigator.pop(context),
                               style: OutlinedButton.styleFrom(
-                                backgroundColor: const Color(0xffF4F5FA),
+                                backgroundColor: ColorConstant.bgLight,
                                 side: BorderSide.none,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.r),
@@ -161,7 +165,7 @@ class AppBottomSheet {
                               child: Text(
                                 "Cancel",
                                 style: TextStyle(
-                                  color: Colors.black87,
+                                  color: ColorConstant.inkDark,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.sp,
                                 ),
@@ -181,7 +185,7 @@ class AppBottomSheet {
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                backgroundColor: const Color(0xff00C896),
+                                backgroundColor: ColorConstant.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.r),
                                 ),
@@ -192,7 +196,7 @@ class AppBottomSheet {
                                   Text(
                                     buttonText,
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: ColorConstant.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16.sp,
                                     ),
@@ -201,7 +205,7 @@ class AppBottomSheet {
                                   Expanded(
                                     child:  Icon(
                                       Icons.check,
-                                      color: Colors.white,
+                                      color: ColorConstant.white,
                                       weight: 100.0,
                                     ),
                                   ),

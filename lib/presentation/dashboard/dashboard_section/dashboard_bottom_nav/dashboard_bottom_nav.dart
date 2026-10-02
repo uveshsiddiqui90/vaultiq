@@ -23,7 +23,7 @@ class DashboardBottomNav extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.w),
 
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
 
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24.r),
@@ -100,7 +100,7 @@ class DashboardBottomNav extends StatelessWidget {
                 ],
               ),
 
-              child: Icon(Icons.add, color: Colors.white, size: 32.sp),
+              child: Icon(Icons.add, color: ColorConstant.white, size: 32.sp),
             ),
           ),
         ),
@@ -127,7 +127,7 @@ class DashboardBottomNav extends StatelessWidget {
 
       decoration: BoxDecoration(
         color: isSelected
-            ? ColorConstant.focusedFieldBg
+            ? ColorConstant.primaryLight
             : Colors.transparent,
         borderRadius: BorderRadius.circular(14.r),
       ),

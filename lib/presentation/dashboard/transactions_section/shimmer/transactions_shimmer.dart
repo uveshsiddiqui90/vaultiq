@@ -10,11 +10,11 @@ class TransactionsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: SafeArea(
         child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: ColorConstant.border,
+          highlightColor: ColorConstant.bgLight,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
             child: Column(
@@ -52,7 +52,7 @@ class TransactionsShimmer extends StatelessWidget {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: ColorConstant.white,
                       borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: ListView.builder(
@@ -104,7 +104,7 @@ class TransactionsShimmer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(radius.r),
       ),
     );

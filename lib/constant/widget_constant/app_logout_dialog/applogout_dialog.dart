@@ -15,7 +15,7 @@ class AppLogoutDialog {
         child: Container(
           padding: EdgeInsets.all(24.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.circular(30.r),
           ),
           child: Column(
@@ -26,7 +26,7 @@ class AppLogoutDialog {
                 height: 72.h,
                 width: 72.w,
                 decoration: BoxDecoration(
-                  color: const Color(0xffFFECEF),
+                  color: ColorConstant.redLight,
                   borderRadius: BorderRadius.circular(22.r),
                 ),
                 child: Center(
@@ -42,7 +42,7 @@ class AppLogoutDialog {
                 style: AppStyles.syne(
                   size: 28,
                   weight: AppFontWeight.bold,
-                  color: ColorConstant.darkBg,
+                  color: ColorConstant.inkDark,
                 ),
               ),
 
@@ -55,7 +55,7 @@ class AppLogoutDialog {
                 style: AppStyles.dmSans(
                   size: AppTextSize.body,
                   weight: AppFontWeight.medium,
-                  color: Colors.grey,
+                  color: ColorConstant.inkMuted,
                 ),
               ),
 
@@ -70,7 +70,7 @@ class AppLogoutDialog {
                       child: OutlinedButton(
                         onPressed: () => Get.back(),
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: const Color(0xffF5F5F5),
+                          backgroundColor: ColorConstant.bgLight,
                           side: BorderSide.none,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.r),
@@ -81,7 +81,7 @@ class AppLogoutDialog {
                           style: AppStyles.dmSans(
                             size: AppTextSize.body,
                             weight: AppFontWeight.bold,
-                            color: ColorConstant.darkBg,
+                            color: ColorConstant.inkDark,
                           ),
                         ),
                       ),
@@ -100,8 +100,8 @@ class AppLogoutDialog {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 8,
-                          shadowColor: const Color(0xffFF4F73).withValues(alpha: .45),
-                          backgroundColor: const Color(0xffFF4F73),
+                          shadowColor: ColorConstant.red.withValues(alpha: .45),
+                          backgroundColor: ColorConstant.red,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.r),
                           ),
@@ -111,7 +111,7 @@ class AppLogoutDialog {
                           style: AppStyles.dmSans(
                             size: AppTextSize.body,
                             weight: AppFontWeight.bold,
-                            color: Colors.white,
+                            color: ColorConstant.white,
                           ),
                         ),
                       ),

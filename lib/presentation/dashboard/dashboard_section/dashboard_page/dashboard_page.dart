@@ -54,7 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
       final index = controller.currentIndex.value;
 
       return Scaffold(
-        backgroundColor: ColorConstant.primaryColor,
+        backgroundColor: ColorConstant.bgLight,
         extendBody: true,
         body: IndexedStack(
           index: index,

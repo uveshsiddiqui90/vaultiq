@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vaultiq/constant/color_constant.dart';
 
 class AppSnackbar {
   
@@ -11,8 +12,8 @@ class AppSnackbar {
       title,
       message,
       snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
+      backgroundColor: ColorConstant.primary,
+      colorText: ColorConstant.white,
       margin: const EdgeInsets.all(12),
       borderRadius: 12,
       duration: const Duration(seconds: 3),
@@ -27,8 +28,8 @@ class AppSnackbar {
       title,
       message,
       snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
+      backgroundColor: ColorConstant.red,
+      colorText: ColorConstant.white,
       margin: const EdgeInsets.all(12),
       borderRadius: 12,
       duration: const Duration(seconds: 3),
@@ -43,8 +44,8 @@ class AppSnackbar {
       title,
       message,
       snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.orange,
-      colorText: Colors.white,
+      backgroundColor: ColorConstant.amber,
+      colorText: ColorConstant.white,
       margin: const EdgeInsets.all(12),
       borderRadius: 12,
       duration: const Duration(seconds: 3),

@@ -28,7 +28,7 @@ class ProfileOptionTile extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -40,17 +40,17 @@ class ProfileOptionTile extends StatelessWidget {
             height: 36,
             width: 36,
             decoration: BoxDecoration(
-              color: iconBackgroundColor ?? Colors.grey.shade100,
+              color: iconBackgroundColor ?? ColorConstant.bgLight,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, size: 20, color: iconColor ?? Colors.black),
+            child: Icon(icon, size: 20, color: iconColor ?? ColorConstant.inkDark),
           ),
           title: Text(
             title,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: ColorConstant.darkBg, //textColor ?? Colors.black,
+              color: ColorConstant.inkDark,
             ),
           ),
           subtitle: Text(
@@ -58,7 +58,7 @@ class ProfileOptionTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              color: ColorConstant.darkBg.withValues(alpha: 0.5),
+              color: ColorConstant.inkMuted,
             ),
           ),
           trailing:
@@ -66,7 +66,7 @@ class ProfileOptionTile extends StatelessWidget {
               const Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 16,
-                color: Colors.grey,
+                color: ColorConstant.inkMuted,
               ),
         ),
       ),

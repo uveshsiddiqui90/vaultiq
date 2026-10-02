@@ -33,17 +33,17 @@ class AppStyles {
 
 // ─── Quick Reference ────────────────────────────
 // Balance amount:
-//   AppStyles.syne(size:32, color:Colors.white)
+//   AppStyles.syne(size:32, color:ColorConstant.white)
 // Screen title:
 //   AppStyles.syne(weight:FontWeight.w700, size:16)
 // Btn text:
-//   AppStyles.syne(size:14, color:Colors.white)
+//   AppStyles.syne(size:14, color:ColorConstant.white)
 // Txn name:
 //   AppStyles.dmSans(weight:FontWeight.w700, size:12)
 // Field label:
 //   AppStyles.dmSans(weight:FontWeight.w700, size:11,
-//     color:AppColors.inkMuted, letterSpacing:0.4)
+//     color:ColorConstant.inkMuted, letterSpacing:0.4)
 // Timestamp:
-//   AppStyles.dmSans(size:10, color:AppColors.inkMuted)
+//   AppStyles.dmSans(size:10, color:ColorConstant.inkMuted)
 // Nav label:
 //   AppStyles.dmSans(weight:FontWeight.w700, size:9)

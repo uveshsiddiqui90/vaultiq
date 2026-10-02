@@ -11,10 +11,10 @@ class BudgetShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
+        baseColor: ColorConstant.border,
+        highlightColor: ColorConstant.bgLight,
         child: Padding(
           padding: AppPadding.screen,
           child: Column(
@@ -28,7 +28,7 @@ class BudgetShimmer extends StatelessWidget {
                   width: 130.w,
                   height: 32.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ColorConstant.white,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
@@ -64,7 +64,7 @@ class BudgetShimmer extends StatelessWidget {
                       child: Container(
                         height: 8.h,
                         width: double.infinity,
-                        color: Colors.white,
+                        color: ColorConstant.white,
                       ),
                     ),
 
@@ -98,7 +98,7 @@ class BudgetShimmer extends StatelessWidget {
                 width: double.infinity,
                 height: 58.h,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(18.r),
                 ),
               ),
@@ -114,7 +114,7 @@ class BudgetShimmer extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(14.r),
       ),
       child: child,
@@ -129,7 +129,7 @@ class BudgetShimmer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(8.r),
       ),
     );

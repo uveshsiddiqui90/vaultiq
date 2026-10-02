@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vaultiq/constant/color_constant.dart';
 
 class ImagePickerBottomSheet {
   static void show({
@@ -17,7 +18,7 @@ class ImagePickerBottomSheet {
             vertical: 24.h,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(28.r),
             ),
@@ -31,7 +32,7 @@ class ImagePickerBottomSheet {
                   width: 45.w,
                   height: 5.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: ColorConstant.border,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
@@ -43,6 +44,7 @@ class ImagePickerBottomSheet {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
+                    color: ColorConstant.inkDark,
                   ),
                 ),
 
@@ -52,7 +54,7 @@ class ImagePickerBottomSheet {
                   "Choose how you want to add your photo",
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: Colors.grey,
+                    color: ColorConstant.inkMuted,
                   ),
                 ),
 
@@ -119,7 +121,7 @@ class _ImageOption extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20.h),
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: ColorConstant.bgLight,
           borderRadius: BorderRadius.circular(18.r),
         ),
         child: Column(
@@ -128,12 +130,12 @@ class _ImageOption extends StatelessWidget {
               height: 55.h,
               width: 55.w,
               decoration: const BoxDecoration(
-                color: Colors.teal,
+                color: ColorConstant.primary,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
-                color: Colors.white,
+                color: ColorConstant.white,
                 size: 28.sp,
               ),
             ),
@@ -145,6 +147,7 @@ class _ImageOption extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
+                color: ColorConstant.inkDark,
               ),
             ),
 
@@ -154,7 +157,7 @@ class _ImageOption extends StatelessWidget {
               subtitle,
               style: TextStyle(
                 fontSize: 11.sp,
-                color: Colors.grey,
+                color: ColorConstant.inkMuted,
               ),
             ),
           ],

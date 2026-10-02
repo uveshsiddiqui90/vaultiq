@@ -24,7 +24,7 @@ class TransactionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: SafeArea(
         child: Obx(() {
           if (transactionsController.isLoading.value) {
@@ -102,7 +102,7 @@ class TransactionsPage extends StatelessWidget {
         width: 44.w,
         height: 44.h,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorConstant.white,
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(color: ColorConstant.border),
         ),
@@ -124,7 +124,7 @@ class TransactionsPage extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 11.h),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.circular(14.r),
             border: Border.all(color: ColorConstant.border),
           ),
@@ -168,7 +168,7 @@ class TransactionsPage extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(20.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
           ),
           child: Column(
@@ -180,7 +180,7 @@ class TransactionsPage extends StatelessWidget {
                   width: 45.w,
                   height: 5.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: ColorConstant.border,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -272,7 +272,7 @@ class TransactionsPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: ColorConstant.border),
       ),
@@ -442,7 +442,7 @@ class TransactionsPage extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(20.w),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorConstant.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
           ),
           child: Column(
@@ -454,7 +454,7 @@ class TransactionsPage extends StatelessWidget {
                   width: 45.w,
                   height: 5.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: ColorConstant.border,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),

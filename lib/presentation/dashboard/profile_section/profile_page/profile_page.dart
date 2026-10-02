@@ -50,7 +50,7 @@ class ProfilePage extends StatelessWidget {
                             height: 70.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white,
+                              color: ColorConstant.white,
                             ),
                             child: Obx(() {
                               if (profileController
@@ -69,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                                   backgroundColor: ColorConstant.primaryDark,
                                   child: Icon(
                                     Icons.person,
-                                    color: Colors.white,
+                                    color: ColorConstant.white,
                                     size: 40,
                                   ),
                                 );
@@ -91,7 +91,7 @@ class ProfilePage extends StatelessWidget {
                             style: AppStyles.dmSans(
                               size: AppTextSize.medium,
                               weight: AppFontWeight.semiBold,
-                              color: ColorConstant.white,
+                              color: ColorConstant.white.withValues(alpha: 0.72),
                             ),
                           ),
                           AppSize.h10,
@@ -104,13 +104,13 @@ class ProfilePage extends StatelessWidget {
                                       .toString(),
                                   "Spent",
                                 ),
-                                Divider(color: Colors.white, thickness: 1),
+                                Divider(color: ColorConstant.white, thickness: 1),
                                 profiledesc(
                                   profileController.totalTransactions.value
                                       .toString(),
                                   "Transactions",
                                 ),
-                                Divider(color: Colors.white, thickness: 1),
+                                Divider(color: ColorConstant.white, thickness: 1),
                                 profiledesc(
                                   profileController.totalSavedAmount.value
                                       .toString(),
@@ -131,7 +131,7 @@ class ProfilePage extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: ColorConstant.primaryColor,
+                        color: ColorConstant.white,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -141,7 +141,7 @@ class ProfilePage extends StatelessWidget {
                             title: "Spent",
                             data: profileController.totalExpenseAmount.value
                                 .toString(),
-                            color: ColorConstant.focusedFieldBg,
+                            color: ColorConstant.primaryLight,
                             iconData: Icons.arrow_downward,
                             iconColor: ColorConstant.primaryDark,
                           ),
@@ -150,8 +150,8 @@ class ProfilePage extends StatelessWidget {
                             data: profileController.totalTransactions.value
                                 .toString(),
                             iconData: Icons.note,
-                            color: ColorConstant.txtColor2nd.withAlpha(50),
-                            iconColor: ColorConstant.txtColor2nd,
+                            color: ColorConstant.blueLight,
+                            iconColor: ColorConstant.blue,
                           ),
                           topDatadesc(
                             title: "Saved",
@@ -184,7 +184,7 @@ class ProfilePage extends StatelessWidget {
                             style: AppStyles.syne(
                               size: AppTextSize.title,
                               weight: AppFontWeight.bold,
-                              color: ColorConstant.darkBg,
+                              color: ColorConstant.inkDark,
                             ),
                           ),
                         ),
@@ -223,7 +223,7 @@ class ProfilePage extends StatelessWidget {
                           title: TextConstant.aboutApp,
                           icon: Icons.info,
                           subtitle: "Learn more about this application",
-                          iconBackgroundColor: ColorConstant.txtColor2nd,
+                          iconBackgroundColor: ColorConstant.blue,
                           iconColor: ColorConstant.white,
                           onTap: () {
                             Get.toNamed(AppRoutes.ABOUTAPP);
@@ -257,43 +257,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget profileNameWidget() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(radius: 30, backgroundImage: NetworkImage("")),
-          SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "John Doe",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "john.doe@example.com",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget profiledesc(String title, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -311,7 +274,7 @@ class ProfilePage extends StatelessWidget {
             style: AppStyles.dmSans(
               size: AppTextSize.small,
               weight: AppFontWeight.semiBold,
-              color: ColorConstant.white,
+              color: ColorConstant.white.withValues(alpha: 0.72),
             ),
           ),
         
@@ -335,7 +298,7 @@ class ProfilePage extends StatelessWidget {
             shape: BoxShape.circle,
             color: color ?? ColorConstant.amberLight,
           ),
-          child: Icon(iconData, color: iconColor ?? ColorConstant.darkBg),
+          child: Icon(iconData, color: iconColor ?? ColorConstant.inkDark),
         ),
 
         Text(
@@ -343,7 +306,7 @@ class ProfilePage extends StatelessWidget {
           style: AppStyles.dmSans(
             size: AppTextSize.medium,
             weight: AppFontWeight.semiBold,
-            color: ColorConstant.darkBg,
+            color: ColorConstant.inkDark,
           ),
         ),
         AppSize.h10,
@@ -352,7 +315,7 @@ class ProfilePage extends StatelessWidget {
           style: AppStyles.dmSans(
             size: AppTextSize.small,
             weight: AppFontWeight.semiBold,
-            color: ColorConstant.darkBg,
+            color: ColorConstant.inkMuted,
           ),
         ),
       ],

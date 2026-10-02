@@ -79,7 +79,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
           decoration: BoxDecoration(
             color: isFocused
-                ? ColorConstant.focusedFieldBg
+                ? ColorConstant.primaryLight
                 : ColorConstant.border,
 
             borderRadius: BorderRadius.circular(16.r),
@@ -175,7 +175,7 @@ class CustomInputContainer extends StatelessWidget {
 
       decoration: BoxDecoration(
         color: isFocused
-            ? ColorConstant.focusedFieldBg
+            ? ColorConstant.primaryLight
             : ColorConstant.border,
 
         borderRadius: BorderRadius.circular(16.r),

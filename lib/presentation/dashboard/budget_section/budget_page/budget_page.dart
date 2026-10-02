@@ -27,7 +27,7 @@ class BudgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Padding(
         padding: AppPadding.screen,
         child: Obx(
@@ -47,7 +47,7 @@ class BudgetPage extends StatelessWidget {
                   style: AppStyles.dmSans(
                     size: AppTextSize.extraLarge,
                     weight: AppFontWeight.bold,
-                    color: ColorConstant.darkBg,
+                    color: ColorConstant.inkDark,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -76,7 +76,7 @@ class BudgetPage extends StatelessWidget {
       width: double.infinity,
       padding: AppPadding.all16,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -95,7 +95,7 @@ class BudgetPage extends StatelessWidget {
             style: AppStyles.syne(
               size: AppTextSize.medium,
               weight: AppFontWeight.bold,
-              color: ColorConstant.darkBg,
+              color: ColorConstant.inkMuted,
             ),
           ),
           SizedBox(height: 8),
@@ -118,7 +118,7 @@ class BudgetPage extends StatelessWidget {
     return Container(
       padding: AppPadding.all16,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -160,7 +160,7 @@ class BudgetPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppTextSize.body,
                 fontWeight: AppFontWeight.regular,
-                color: Colors.grey,
+                color: ColorConstant.inkMuted,
               ),
             ),
           ),
@@ -173,7 +173,7 @@ class BudgetPage extends StatelessWidget {
     return Container(
       padding: AppPadding.all16,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -192,6 +192,7 @@ class BudgetPage extends StatelessWidget {
             style: TextStyle(
               fontSize: AppTextSize.title,
               fontWeight: AppFontWeight.medium,
+              color: ColorConstant.inkDark,
             ),
           ),
           SizedBox(height: 8),
@@ -201,7 +202,7 @@ class BudgetPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppTextSize.title,
                 fontWeight: AppFontWeight.bold,
-                color: Colors.red,
+                color: ColorConstant.red,
               ),
             ),
           ),

@@ -18,10 +18,21 @@ class ProfilePicturePage extends StatelessWidget {
 
   final ProfilePictureController controller = Get.find<ProfilePictureController>();
 
+  /// Moves on to onboarding step 3 — "Set Your Monthly Budget".
+  ///
+  /// The step is *pushed* (not `offAllNamed`) so its back button returns here;
+  /// saving the budget clears the whole onboarding stack itself.
+  void _goToBudgetStep() {
+    // Guards against a double tap pushing the same step twice.
+    if (Get.currentRoute == AppRoutes.ADDBUDGET) return;
+
+    Get.toNamed(AppRoutes.ADDBUDGET);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.bgLight,
       body: Padding(
         padding: AppPadding.screen,
         child: SingleChildScrollView(
@@ -30,9 +41,7 @@ class ProfilePicturePage extends StatelessWidget {
             children: [
               AppSize.h40,
               GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.DASHBOARD);
-                },
+                onTap: _goToBudgetStep,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -55,7 +64,7 @@ class ProfilePicturePage extends StatelessWidget {
                 style: AppStyles.dmSans(
                   size: AppTextSize.largeTitle,
                   weight: AppFontWeight.bold,
-                  color: ColorConstant.darkBg,
+                  color: ColorConstant.inkDark,
                 ),
               ),
 
@@ -82,7 +91,7 @@ class ProfilePicturePage extends StatelessWidget {
                       options: CircularDottedBorderOptions(
                         dashPattern: [3, 5],
                         strokeWidth: 2,
-                        color: ColorConstant.hinttxtColor,
+                        color: ColorConstant.border,
                         padding: EdgeInsets.all(4),
                       ),
                       child: Container(
@@ -182,18 +191,25 @@ class ProfilePicturePage extends StatelessWidget {
               AppSize.h60,
 
               // ───────── Continue ─────────
-              CustomButton(
-                label: TextConstant.continueButton,
-                onPressed: () async {
-                  final imageUrl = await controller.uploadProfileImage();
+              // `Obx` so the button shows a spinner (and ignores further taps)
+              // while the photo is uploading.
+              Obx(
+                () => CustomButton(
+                  label: TextConstant.continueButton,
+                  isLoading: controller.isUploading.value,
+                  onPressed: () async {
+                    // Nothing picked → treat it exactly like "Skip" instead of
+                    // trapping the user on this screen with an error.
+                    if (controller.profileImage.value == null) {
+                      _goToBudgetStep();
+                      return;
+                    }
 
-                  if (imageUrl != null) {
-                    Get.toNamed(AppRoutes.DASHBOARD);
-                    debugPrint("Uploaded URL: $imageUrl");
+                    final uploaded = await controller.uploadProfileImage();
 
-                    // next screen par jao
-                  }
-                },
+                    if (uploaded) _goToBudgetStep();
+                  },
+                ),
               ),
             ],
           ),

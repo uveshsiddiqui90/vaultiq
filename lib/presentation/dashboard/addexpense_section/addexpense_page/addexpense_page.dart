@@ -21,7 +21,7 @@ class AddexpensePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: Padding(
         padding: AppPadding.screen,
         child: SingleChildScrollView(
@@ -35,7 +35,7 @@ class AddexpensePage extends StatelessWidget {
                   style: AppStyles.syne(
                     size: AppTextSize.largeTitle,
                     weight: AppFontWeight.bold,
-                    color: ColorConstant.txtColor,
+                    color: ColorConstant.inkDark,
                   ),
                 ),
               ),
@@ -196,7 +196,7 @@ class CustomDropdownField extends StatelessWidget {
             );
           }).toList(),
           onChanged: onChanged,
-          dropdownColor: ColorConstant.focusedFieldBg,
+          dropdownColor: ColorConstant.white,
         ),
       ],
     );

@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget
               colorScheme: ColorScheme.fromSeed(
                 seedColor: ColorConstant.primary,
               ),
-              scaffoldBackgroundColor: ColorConstant.primaryColor,
+              scaffoldBackgroundColor: ColorConstant.bgLight,
             ),
             
        ));

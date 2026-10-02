@@ -33,7 +33,7 @@ class AuthFooterText extends StatelessWidget {
             style: AppStyles.dmSans(
               size: AppTextSize.medium,
               weight: AppFontWeight.bold,
-              color: ColorConstant.txtColor2nd,
+              color: ColorConstant.primaryDark,
             ),
 
             recognizer: TapGestureRecognizer()..onTap = onTap,

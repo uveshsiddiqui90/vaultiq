@@ -11,11 +11,11 @@ class AnalyticsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstant.primaryColor,
+      backgroundColor: ColorConstant.bgLight,
       body: SafeArea(
         child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: ColorConstant.border,
+          highlightColor: ColorConstant.bgLight,
           child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             padding: AppPadding.screen,
@@ -66,7 +66,7 @@ class AnalyticsShimmer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(radius),
       ),
     );
@@ -81,7 +81,7 @@ class AnalyticsShimmer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(radius),
       ),
     );
